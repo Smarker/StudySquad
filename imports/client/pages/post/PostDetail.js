@@ -58,21 +58,26 @@ class PostDetail extends React.Component {
 
     return (
       <Grid stackable>
-        <Grid.Column width={2} verticalAlign='middle' textAlign='left'>
+        <Grid.Column width={1} verticalAlign='middle' textAlign='left'>
           <Icon className = "iconHover" name='thumbs up' size='large' onClick={this.toggleLike} /> {post.likeCount}
           <p>Like</p>
           <Icon className = "iconHover" name='flag' size='large' onClick={this.toggleFlag} /> {post.flagCount}
           <p>Flag</p>
         </Grid.Column>
-        <Grid.Column width={10}>
+        <Grid.Column verticalAlign='middle' width={3}>
           <Header size='huge'>
             {post.title}
           </Header>
           <div>
-           {getFormattedDate(post.createdDate) + ' ' + post.school + ' ' + post.class}
+            {getFormattedDate(post.createdDate)} <br></ br>
+            <Label tag>{post.school}</Label>
+            <Label tag>{post.class}</Label>
           </div>
         </Grid.Column>
-        <Grid.Column textAlign='right' width={4}>
+        <Grid.Column verticalAlign='middle' width={8}>
+          {post.description}
+        </Grid.Column>
+        <Grid.Column verticalAlign='middle' textAlign='right' width={4}>
           <Item>
             <Item.Content verticalAlign='middle'>
               <Item.Image size='tiny' src='/matt.jpg' />
@@ -80,11 +85,6 @@ class PostDetail extends React.Component {
               {rep}
             </Item.Content>
           </Item>
-        </Grid.Column>
-        <Grid.Column width={2}>
-        </Grid.Column>
-        <Grid.Column width={14}>
-          {post.description}
         </Grid.Column>
       </Grid>
     )

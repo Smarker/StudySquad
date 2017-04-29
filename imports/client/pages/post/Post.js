@@ -53,8 +53,8 @@ import Posts from '/collections/PostSchema';
   
       if (this.props.post.documents) {
         documents = this.props.post.documents.map((document) => {
-      return (     <div>
-                      <List.Item href={document.base64} target="_blank" key={document.name}>{document.name}</List.Item>
+      return (     <div key={document.name}>
+                      <List.Item href={document.base64} target="_blank">{document.name}</List.Item>
                    </div>
              )
         })
