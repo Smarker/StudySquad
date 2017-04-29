@@ -39,10 +39,7 @@ class NavBar extends React.Component {
           <Input icon='search' placeholder='search' />
         </Menu.Item>
         <Menu.Item position='right' as={Link} to={LOGIN_ROUTE}>
-
           {this.props.user ? this.props.user.username : user}
-
-
         </Menu.Item>
       </Menu>
     )
