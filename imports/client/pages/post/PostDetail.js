@@ -12,17 +12,17 @@ class PostDetail extends React.Component {
   }
 
   toggleLike() {
-    //check if current user already liked:
-    console.log("in toggle like");
-    console.log(this.props.post.likes);
-
     let index = this.props.post.likes.indexOf(Meteor.user().username);
     if(index < 0) { //user didn't like the post yet
-      this.props.post.likes.push(Meteor.user().username);
-      this.props.post.likeCount++;
+      // this.props.post.likes.push(Meteor.user().username);
+      // this.props.post.likeCount++;
+      let users = [...this.props.post.likes];
+      users.push(Meteor.user().username);
+      Posts.update({_id: this.props.post._id}, {$set: {likes: users, likeCount: this.props.post.likeCount+1}})
     } else {
-      this.props.post.likes.splice(index, 1); //remove one post at index index
-      this.props.post.likeCount--;
+      let users = [...this.props.post.likes];
+      users.splice(index, 1); //remove one post at index index
+      Posts.update({_id: this.props.post._id}, {$set: {likes: users, likeCount: this.props.post.likeCount-1}})
     }
   }
 
@@ -57,4 +57,8 @@ class PostDetail extends React.Component {
   }
 }
 
-export default PostDetail;
+
+export default PostDetailContainer = createContainer((props) => {
+  let user = Meteor.user();
+  return {user};
+}, PostDetail);
