@@ -4,26 +4,32 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import { Mongo } from 'meteor/mongo';
 
 User = new SimpleSchema({
+  _id: schema.ID,
   firstName: {
     type: String,
     label: 'First Name',
-    required: true
+    optional: false
   },
   lastName: {
     type: String,
     label: 'Last Name',
-    required: true
+    optional: false
   },
   email: {
     type: String,
     label: 'Email',
-    required: true
+    optional: false
   },
   password: {
     type: String,
     label: 'Password',
-    requird: true
+    optional: false
+  },
+  username: {
+    type: String,
+    label: 'User',
+    optional: false
   }
 });
 
-export default User;
+Meteor.users.attachSchema(User)
