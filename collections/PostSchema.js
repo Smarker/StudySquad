@@ -27,6 +27,17 @@ const Posts = new Mongo.Collection('Posts');
 //     },
 //     optional: false,
 //   },
+
+    // comments: {
+    //   array of {
+    //     username
+    //     avatar
+    //     comment
+    //     createdDate
+    //   }
+    // }
+
+
 //   createdDate: {
 //     type: Date,
 //     label: 'Created Date',
@@ -53,7 +64,7 @@ const Posts = new Mongo.Collection('Posts');
 //     label: 'School',
 //     optional: false,
 //   },
-//   subject: {
+//   class: {
 //     type: String,
 //     label: 'Subject',
 //     optional: false
