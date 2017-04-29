@@ -59,9 +59,9 @@ class PostDetail extends React.Component {
     return (
       <Grid stackable>
         <Grid.Column width={2} verticalAlign='middle' textAlign='left'>
-          <Icon name='thumbs up' size='large' onClick={this.toggleLike} /> {post.likeCount}
+          <Icon className = "iconHover" name='thumbs up' size='large' onClick={this.toggleLike} /> {post.likeCount}
           <p>Like</p>
-          <Icon name='flag' size='large' onClick={this.toggleFlag} /> {post.flagCount}
+          <Icon className = "iconHover" name='flag' size='large' onClick={this.toggleFlag} /> {post.flagCount}
           <p>Flag</p>
         </Grid.Column>
         <Grid.Column width={10}>
