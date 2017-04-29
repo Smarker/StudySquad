@@ -1,13 +1,12 @@
 'use strict'
 import { Meteor } from 'meteor/meteor';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema'
+import SimpleSchema from 'simpl-schema'
 import { Mongo } from 'meteor/mongo';
 import schema from 'commonSchema';
 
 const Posts = new Mongo.Collection('Posts');
 
 const Post = new SimpleSchema({
-  _id: schema.ID,
   title: {
     type: String,
     label: 'Title',
@@ -19,7 +18,7 @@ const Post = new SimpleSchema({
     optional: false
   },
   likes: {
-    type: Number,
+    type: SimpleSchema.Integer,
     label: 'Likes',
     autoValue: function () {
       if(this.isInsert) {
@@ -39,7 +38,7 @@ const Post = new SimpleSchema({
     optional: false
   },
   attachmentNumber: {
-    type: Number,
+    type: SimpleSchema.Integer,
     label: 'Attachment Number',
     optional: false
   },
@@ -58,6 +57,9 @@ const Post = new SimpleSchema({
     type: String,
     label: 'Subject',
     optional: false
+  },
+  documents: {
+    type: [schema.documents]
   }
 })
 

@@ -1,16 +1,20 @@
 import { Mongo } from 'meteor/mongo';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 
 const schema = {};
 
-schema.ID = {
-  type: SimpleSchema.RegEx.Id,
-  label: 'Mongo ID',
-  autoValue: function () {
-    if (this.isInsert && (this.value && !this.value._str)) {
-      return new Mongo.ObjectID();
-    }
+schema.subject = new SimpleSchema({
+  name: {
+    type: String,
+    label: 'Name'
+  },
+});
+
+schema.documents = new SimpleSchema({
+  document: {
+    type: String,
+    labe: 'Document base64'
   }
-}
+})
 
 export default schema;
