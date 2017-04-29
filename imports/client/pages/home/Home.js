@@ -12,7 +12,8 @@ class Home extends React.Component {
     super(props);
     this.state = {
       school: '',
-      subject: ''
+      subject: '',
+      searchHeaderHeight: $(window).innerHeight()*0.4
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,6 +31,22 @@ class Home extends React.Component {
     alert("Selected " + this.state.school
       + " and " + this.state.subject);
     event.preventDefault();
+  }
+
+  updateHeight() {
+    this.setState({searchHeaderHeight: $(window).innerHeight()*0.4});
+  }
+
+  componentWillMount() {
+    this.updateHeight();
+  }
+
+  componentDidMount() {
+    window.addEventListener("resize", this.updateHeight());
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateHeight());
   }
 
   render() {
@@ -76,10 +93,11 @@ class Home extends React.Component {
         value: "Astronomy",
         text: "Astronomy"
       }
-    ]
+    ];
     return (
-      <Grid columns={1} Relaxed>
-        <Grid.Column className='searchHeader' style={{'height':'100%'}}>
+      <Grid columns={1} relaxed verticalAlign='middle' centered>
+        <Grid.Column className='searchHeader'
+        style={{'height': this.state.searchHeaderHeight+'px'}}>
           <Form onSubmit={this.handleSubmit} >
             <Form.Group widths='equal'>
               <Form.Field>
