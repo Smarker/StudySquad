@@ -26,7 +26,7 @@ User = new SimpleSchema({
   },
   username: {
     type: String,
-    label: 'User',
+    label: 'Username',
     optional: false
   }
 });

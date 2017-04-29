@@ -12,7 +12,7 @@ const University = SimpleSchema({
     optional: false
   },
   subject: {
-    type: schema.subject
+    type: [schema.subject]
   }
 
 })
