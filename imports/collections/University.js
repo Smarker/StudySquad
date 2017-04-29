@@ -5,6 +5,7 @@ import { Mongo } from 'meteor/mongo';
 
 const Universities = new Mongo.Collection('Universities');
 
+
 const University = SimpleSchema({
   name: {
     type: String,
@@ -14,8 +15,10 @@ const University = SimpleSchema({
   subject: {
     type: schema.subject
   }
+
 })
 
 Universities.attachSchema(University);
 
 export default Universities;
+
