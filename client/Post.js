@@ -1,4 +1,5 @@
 import React from 'react';
+import { Grid, Card, Icon, Image } from 'semantic-ui-react'
 
 export default class Post extends React.Component {
   constructor(props) {
@@ -7,7 +8,35 @@ export default class Post extends React.Component {
 
   render() {
     return (
-      <h1>hi</h1>
+      <Card>
+        <Card.Content>
+          <Grid>
+            <Grid.Row>
+              <Grid.Column>
+                Icons go here
+              </Grid.Column>
+              <Grid.Column>
+                <Card.Header>
+                  Dummy Title
+                </Card.Header>
+                <Card.Meta>
+                  <span className='date'>
+                    4/28/17
+                  </span>
+                </Card.Meta>
+              </Grid.Column>
+              <Grid.Column>
+                <Card.Description>
+                  Dummy Description
+                </Card.Description>
+              </Grid.Column>
+              <Grid.Column>
+                <Image src='/assets/images/wireframe/image.png' /> Username
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Card.Content>
+      </Card>
     );
   }
 }
