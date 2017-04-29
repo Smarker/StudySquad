@@ -4,7 +4,7 @@ import { Form, Button, Dropdown } from 'semantic-ui-react';
 import { handleChange } from '/imports/client/core/utils/formHelpers';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Random } from 'meteor/random'
-import Schools from '/collections/SchoolsSchema';
+import Schools from '/collections/SchoolSchema';
 
 class AddPost extends React.Component {
   constructor (props) {

@@ -1,7 +1,7 @@
 'use strict'
 import React from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
-import Schools from '/collections/SchoolsSchema';
+import Schools from '/collections/SchoolSchema';
 import PostData from '../../core/reusableComponents/PostData';
 import Posts from '/collections/PostSchema';
 
