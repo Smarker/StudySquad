@@ -4,7 +4,7 @@ import SimpleSchema from 'simpl-schema';
 // import schema from './CommonSchema';
 import { Mongo } from 'meteor/mongo';
 
-const Universities = new Mongo.Collection('Universities');
+const Schools = new Mongo.Collection('Schools');
 // console.log(schema.subject);
 // const University = new SimpleSchema({
 //   name: {
@@ -21,5 +21,5 @@ const Universities = new Mongo.Collection('Universities');
 
 // Universities.attachSchema(University);
 
-export default Universities;
+export default Schools;
 
