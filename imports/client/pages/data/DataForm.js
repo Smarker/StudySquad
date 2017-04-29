@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { handleChange } from '/imports/client/core/utils/formHelpers';
-import Schools from '/imports/collections/SchoolSchema';
+import Schools from '/collections/SchoolSchema';
 
 export default class DataForm extends React.Component {
   constructor(props) {
@@ -18,7 +18,19 @@ export default class DataForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log("You inserted: " + this.state.school + " " + this.state.class);
-
+    let school = Schools.findOne({name: this.state.school});
+    if(school) {
+      let classes = school.classes;
+      classes.push({
+        name: this.state.class,
+      });
+      Schools.update({_id: school._id}, {$set: {classes: classes}})
+    } else {
+      let clas = {
+        name: this.state.class
+      }
+      Schools.insert({name: this.state.school, classes: [clas]})
+    }
     /*
     check if the school exists in mongo
       if yes
@@ -26,8 +38,6 @@ export default class DataForm extends React.Component {
       else 
         create new school state pair in mongo
     */
-
-    console.log("you should see nothing " + db.Schools.find({}));
   }
   
   render() {
