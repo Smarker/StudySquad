@@ -46,7 +46,7 @@ class PostDetail extends React.Component {
 
   render () {
     let rep;
-    if (this.props.poster.profile.rep) {
+    if (this.props.poster && this.props.poster.profile.rep) {
       rep = (
         <div>
           <Icon name='star' size='big' /> {this.props.poster.profile.rep}
@@ -74,8 +74,8 @@ class PostDetail extends React.Component {
         </Grid.Column>
         <Grid.Column textAlign='right' width={4}>
           <Item>
-            <Item.Image size='tiny' src='/matt.jpg' />
             <Item.Content verticalAlign='middle'>
+              <Item.Image size='tiny' src='/matt.jpg' />
               {post.createdBy}
               {rep}
             </Item.Content>
