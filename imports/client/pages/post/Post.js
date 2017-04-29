@@ -1,18 +1,14 @@
 'use strict'
 import React from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
-import Universities from '/collections/UniversitySchema';
+import Schools from '/collections/SchoolsSchema';
 import PostData from '../../core/reusableComponents/PostData';
 import Posts from '/collections/PostSchema';
 
  class Post extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {postID: props.location.pathname.split('/')};
-
-
-
   }
 
   render () {
@@ -32,7 +28,7 @@ let PostContainer = createContainer((props) => {
     find title
     find description
   */
-  console.log(props.location.pathname.split('/'));
+  let postID = props.location.pathname.split('/');
 
   console.log(Posts.find().fetch());
 

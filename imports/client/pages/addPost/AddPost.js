@@ -4,7 +4,7 @@ import { Form, Button, Dropdown } from 'semantic-ui-react';
 import { handleChange } from '/imports/client/core/utils/formHelpers';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Random } from 'meteor/random'
-import Universities from '/collections/UniversitySchema';
+import Schools from '/collections/SchoolsSchema';
 
 class AddPost extends React.Component {
   constructor (props) {
@@ -25,13 +25,13 @@ class AddPost extends React.Component {
 
   submit (event) {
     event.preventDefault();
-    let school = Universities.findOne({name: this.state.school});
+    let school = Schools.findOne({name: this.state.school});
     if (school) {
       let classes = [...school.classes];
       classes.push(this.state.class);
-      Universities.update({name: this.state.school}, {$set: {classes: classes}})
+      Schools.update({name: this.state.school}, {$set: {classes: classes}})
     } else {
-      Universities.insert({name: this.state.school, class: [this.state.class]})
+      Schools.insert({name: this.state.school, class: [this.state.class]})
     }
 
 
