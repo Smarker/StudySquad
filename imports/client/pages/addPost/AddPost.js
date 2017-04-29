@@ -4,6 +4,7 @@ import { Form, Button, Dropdown, Message, Dimmer, Loader, Table, Icon, Input, He
 import { handleChange } from '/imports/client/core/utils/formHelpers';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Random } from 'meteor/random'
+import NavSearchResults from '/imports/client/core/reusableComponents/NavSearchResults'
 import Schools from '/collections/SchoolSchema';
 import Posts from '/collections/PostSchema';
 
@@ -174,7 +175,11 @@ class AddPost extends React.Component {
   }
 
   render () {
-    
+    if (this.props.navSearch.length > 0) {
+      return <NavSearchResults posts={this.props.navSearch} />
+    }
+
+
     let schoolOptions = this.state.schools.map((school) => {
       return {
         text: school.name,

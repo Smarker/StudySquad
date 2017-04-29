@@ -1,5 +1,8 @@
 'use strict';
 import React from 'react';
+import { Provider } from 'react-redux';
+import store from './store';
+import { clearSearch } from './actions';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import MainLayout from './MainLayout';
 import '/imports/client/pages/home/routes';
@@ -10,11 +13,13 @@ import '/imports/client/pages/data/routes';
 import pages from '/imports/client/pages/pages';
 
 const Routes = (
-  <Router history={browserHistory}>
-    <Route path='/' component={MainLayout}>
-      {pages}
-    </Route>
-  </Router>
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path='/' component={MainLayout} onChange={() => store.dispatch(clearSearch)}>
+        {pages}
+      </Route>
+    </Router>
+  </Provider>
 )
 
 export default Routes;

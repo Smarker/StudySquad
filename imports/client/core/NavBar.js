@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Link } from 'react-router';
 import { Menu, Icon, Input } from 'semantic-ui-react'
+import { handleChange } from '/imports/client/core/utils/formHelpers';
 import LOGIN_ROUTE from '/imports/client/pages/login/routes';
 // import SIGN_UP_ROUTE from '/imports/client/pages/signUp/routes';
 import ADD_POST_ROUTE from '/imports/client/pages/addPost/routes';
@@ -11,6 +12,19 @@ import SEARCH_RESULTS from '/imports/client/pages/searchResults/routes';
 import '../../../client/customStyles/Nav';
 
 class NavBar extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      search: ''
+    }
+    this.search = this.search.bind(this);
+  }
+
+  search() {
+    this.props.search(this.state.search);
+  }
+
+
   componentDidMount () {
     this.props.setNavBarHeight(ReactDOM.findDOMNode(this))
   }
@@ -34,6 +48,13 @@ class NavBar extends React.Component {
         <Menu.Item as={Link} to={ADD_POST_ROUTE}>
           <Icon name='sticky note outline' size='huge' />
           Add post
+        </Menu.Item>
+        <Menu.Item position='right' style={{flexDirection: 'row'}}>
+          <Input
+            action={{ icon: 'search', onClick:this.search}}
+            placeholder='Search posts'
+            value={this.state.search}
+            onChange={(event) => handleChange(this, 'search', event.target.value) } />
         </Menu.Item>
         <Menu.Item position='right' as={Link} to={LOGIN_ROUTE} style={{flexDirection: 'row'}}>
           {this.props.user ? 

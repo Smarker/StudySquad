@@ -2,6 +2,10 @@
   background: #152b42 !important;
 }
 
+.nav-style button.ui.icon.button.button {
+  background: #F3C969
+}
+
 /*.nav-style a:hover {
   color: #FC5130 !important;
 } */

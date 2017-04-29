@@ -7,6 +7,7 @@ import { handleChange } from '/imports/client/core/utils/formHelpers';
 import Schools from '/collections/SchoolSchema';
 import PostDetail from './PostDetail';
 import Posts from '/collections/PostSchema';
+import NavSearchResults from '/imports/client/core/reusableComponents/NavSearchResults'
 
   class Post extends React.Component {
     constructor (props) {
@@ -31,6 +32,13 @@ import Posts from '/collections/PostSchema';
     }
 
     render () {
+      if (this.props.navSearch.length > 0) {
+        return <NavSearchResults posts={this.props.navSearch} />
+      }
+
+
+
+
       let loading = true;
       if(this.props.post) {
       loading = false;

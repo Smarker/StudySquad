@@ -3,6 +3,7 @@ import React from 'react';
 import { Form, Button } from 'semantic-ui-react';
 import { handleChange } from '/imports/client/core/utils/formHelpers';
 import { Accounts } from 'meteor/accounts-base';
+import NavSearchResults from '/imports/client/core/reusableComponents/NavSearchResults'
 
 export default class SignUp extends React.Component {
   constructor (props) {
@@ -36,6 +37,11 @@ export default class SignUp extends React.Component {
   }
 
   render () {
+    if (this.props.navSearch.length > 0) {
+      return <NavSearchResults posts={this.props.navSearch} />
+    }
+
+
     return (  
       <Form>
         <Form.Input

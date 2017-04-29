@@ -7,6 +7,7 @@ import { Header, Dropdown, Button, Grid, Form } from 'semantic-ui-react';
 import '../../../../client/customStyles/Home';
 import { createContainer } from 'meteor/react-meteor-data';
 import { browserHistory } from 'react-router';
+import NavSearchResults from '/imports/client/core/reusableComponents/NavSearchResults'
 import PostItem from '../../core/reusableComponents/PostItem';
 import Posts from '/collections/PostSchema';
 
@@ -90,6 +91,11 @@ class Home extends React.Component {
   }
 
   render() {
+    if (this.props.navSearch.length > 0) {
+      return <NavSearchResults posts={this.props.navSearch} />
+    }
+
+
 
     const PostList = this.props.posts.map((post) => {
       return <PostItem post={post} key={post._id} />;

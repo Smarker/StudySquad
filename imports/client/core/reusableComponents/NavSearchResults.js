@@ -4,16 +4,15 @@ import { Header, Grid, Divider, Dropdown} from 'semantic-ui-react';
 import { createContainer } from 'meteor/react-meteor-data';
 import PostItem from '../../core/reusableComponents/PostItem';
 import { handleChange } from '/imports/client/core/utils/formHelpers';
-import NavSearchResults from '/imports/client/core/reusableComponents/NavSearchResults'
 
 import Posts from '/collections/PostSchema';
 
-class SearchResults extends React.Component {
+class NavSearchResults extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       sort: 'newest',
-      searchResults: this.props.searchResults
+      navSearchResults: props.posts
     }
     this.sort = this.sort.bind(this);
   }
@@ -21,7 +20,7 @@ class SearchResults extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props != nextProps) {
       this.setState({
-        searchResults: nextProps.searchResults
+        navSearchResults: nextProps.navSearchResults
       });
     }
   }
@@ -38,22 +37,14 @@ class SearchResults extends React.Component {
 
     this.setState({
       sort: sortValue,
-      searchResults: Posts.find({school: this.props.params.schoolName, class: this.props.params.className}, options).fetch()
+      navSearchResults: Posts.find({school: this.props.params.schoolName, class: this.props.params.className}, options).fetch()
     })
   }
 
 
   render () {
 
-    if (this.props.navSearch.length > 0) {
-      return <NavSearchResults posts={this.props.navSearch} />
-    }
-
-
-
-
-
-    const PostList = this.state.searchResults.map((post) => {
+    const PostList = this.state.navSearchResults.map((post) => {
       return <PostItem post={post} key={post._id} />;
     });
 
@@ -67,7 +58,7 @@ class SearchResults extends React.Component {
       <Grid columns={1}>
         <Grid.Column width={3}>
           <Header as='h3'>
-            {this.props.schoolName}, {this.props.className}
+            {PostList.length + ' Posts found'} 
           </Header>
         </Grid.Column>
         <Grid.Column width={3} floated='right'>
@@ -88,12 +79,10 @@ class SearchResults extends React.Component {
   }
 }
 
-let SearchResultsContainer = createContainer((props) => {
+let NavSearchResultsContainer = createContainer((props) => {
   return {
-    schoolName: props.params.schoolName,
-    className: props.params.className, 
-    searchResults: Posts.find({school: props.params.schoolName, class: props.params.className}).fetch()
+    
   }
-}, SearchResults);
+}, NavSearchResults);
 
-export default SearchResultsContainer;
+export default NavSearchResultsContainer;
