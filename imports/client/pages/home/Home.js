@@ -13,7 +13,7 @@ class Home extends React.Component {
     this.state = {
       school: '',
       subject: '',
-      searchHeaderHeight: $(window).innerHeight()*0.4
+      searchHeaderHeight: $(window).innerHeight() * 0.4
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,7 +34,7 @@ class Home extends React.Component {
   }
 
   updateHeight() {
-    this.setState({searchHeaderHeight: $(window).innerHeight()*0.4});
+    this.setState({ searchHeaderHeight: $(window).innerHeight() * 0.4 });
   }
 
   componentWillMount() {
@@ -95,37 +95,54 @@ class Home extends React.Component {
       }
     ];
     return (
-      <Grid columns={1} relaxed verticalAlign='middle' centered>
+      <Grid columns={1}>
         <Grid.Column className='searchHeader'
-        style={{'height': this.state.searchHeaderHeight+'px'}}>
-          <Form onSubmit={this.handleSubmit} >
-            <Form.Group widths='equal'>
-              <Form.Field>
-                <label className='searchHeaderText'>Study At</label>
-                <Dropdown placeholder="School"
-                  search selection
-                  options={schoolOptions}
-                  name="school"
-                  value={this.state.school}
-                  onChange={(event, props) => this.handleChange('school', props.value)}
-                />
-              </Form.Field>
-              <Form.Field>
-                <label className='searchHeaderText'>For</label>
-                <Dropdown placeholder="Subject"
-                  search selection
-                  options={subjectOptions}
-                  name="subject"
-                  value={this.state.subject}
-                  onChange={(event, props) => this.handleChange('subject', props.value)}
-                />
-              </Form.Field>
-            </Form.Group>
-            <Form.Button>Search</Form.Button>
-          </Form>
+          style={{ 'height': this.state.searchHeaderHeight + 'px' }}>
+
+
+          <Grid style={{ height: '100%', margin: 0 }}>
+            <Grid.Column verticalAlign='middle'>
+              <Form onSubmit={this.handleSubmit} >
+                <Form.Group>
+                  <Form.Field width={2} />
+                  <Form.Field width={4}>
+                    <label className='searchHeaderText'>Study At</label>
+                    <Dropdown placeholder="School"
+                      search selection
+                      options={schoolOptions}
+                      name="school"
+                      value={this.state.school}
+                      onChange={(event, props) => this.handleChange('school', props.value)}
+                    />
+                  </Form.Field>
+                  <Form.Field width={4}>
+                    <label className='searchHeaderText'>For</label>
+                    <Dropdown placeholder="Subject"
+                      search selection
+                      options={subjectOptions}
+                      name="subject"
+                      value={this.state.subject}
+                      onChange={(event, props) => this.handleChange('subject', props.value)}
+                    />
+                  </Form.Field>
+                  <Form.Field width={4}>
+                    <label style={{visibility: 'hidden'}}>something</label>
+                    <Form.Button style={{paddingLeft: '2em'}}>Search</Form.Button>
+                  </Form.Field>
+                  <Form.Field width={2} />
+
+                </Form.Group>
+              </Form>
+            </Grid.Column>
+          </Grid>
+
+
+
+
+
+
         </Grid.Column>
         <Grid.Column>
-          <PostItem />
         </Grid.Column>
       </Grid>
     );
