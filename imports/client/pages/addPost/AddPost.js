@@ -65,8 +65,8 @@ class AddPost extends React.Component {
       this.setState({alert: {alertVisible: true, message: 'Please upload at least one document', color: 'red'}});
     }
     else {
-      
-      if(Meteor.user()) {
+      let user = this.props.user;
+      if(user) {
         Posts.insert({
             title: this.state.title, 
             description: this.state.description, 
@@ -78,10 +78,11 @@ class AddPost extends React.Component {
             school: this.state.school, 
             class: this.state.clas, 
             createdDate: new Date(), 
-            createdBy: Meteor.user().username, 
+            createdBy: user.username,
             documents:this.state.documents,
             comments: []
         });
+        Meteor.users.update({_id:user._id}, {$set: {'profile.rep': user.profile.rep + 1}});
         this.setState({title: '', description: '', school: '', clas: '', documents: [], alert: {alertVisible: true, message: 'Saved Successfully', color: 'green'}});
       } else {
         this.setState({alert: {alertVisible: true, message: 'You have to be logged in before you submit a post.', color: 'red'}});
@@ -297,7 +298,7 @@ let AddPostContainer = createContainer((props) => {
   if(!schools) {
     schools = [];
   }
-  return {schools, classes};
+  return {schools, classes, user: Meteor.user()};
 }, AddPost);
 
 export default AddPostContainer;
