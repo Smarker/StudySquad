@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor'
 import React from 'react';
 import { render } from 'react-dom';
 import Routes from '/imports/client/core/Routes';
-import { Dropdown, Button, Grid, Form } from 'semantic-ui-react';
+import { Header, Dropdown, Button, Grid, Form } from 'semantic-ui-react';
 import '../../../../client/customStyles/Home';
 import { createContainer } from 'meteor/react-meteor-data';
 import { browserHistory } from 'react-router';
@@ -16,12 +16,14 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
 
+    console.log("loading constructor for home");
+
     this.state = {
       posts: props.posts,
       school: '', //selected school from dropdown
       subject: '', //selected subject from dropdown
       schools: props.schools, //from mongo
-      schoolOptions: [], //from mongo
+      schoolOptions: props.schoolOptions, //from mongo
       classOptions: [{
         key: "",
         value: "",
@@ -112,7 +114,7 @@ class Home extends React.Component {
                   <Form.Field width={4}>
                     <label className='searchHeaderText'>Study At</label>
                     <Dropdown
-                      defaultValue="Rutgers"
+                      placeholder="School"
                       search selection
                       options={this.state.schoolOptions}
                       name="school"
@@ -142,10 +144,10 @@ class Home extends React.Component {
           </Grid>
         </Grid.Column>
         <Grid.Column>
+          <Header as='h3' dividing>
+            Recent Posts
+          </Header>
           {PostList}
-
-
-
         </Grid.Column>
       </Grid>
     );
@@ -154,6 +156,8 @@ class Home extends React.Component {
 
 
 let HomeContainer = createContainer((props) => {
+  console.log("in home container");
+
   let schools = Schools.find({}).fetch();
 
   let posts = Posts.find({}, {sort: {createdDate: 1}, limit: 5}).fetch();
@@ -168,6 +172,8 @@ let HomeContainer = createContainer((props) => {
       text: school.name
     }))
   );
+
+  console.log('schools', schools);
 
   return {
     posts,
