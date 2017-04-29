@@ -1,21 +1,35 @@
 import React from 'react';
 import { Grid, Card, Icon, Image, Item, Label } from 'semantic-ui-react';
+import { createContainer } from 'meteor/react-meteor-data';
 import '../../../../client/customStyles/Post';
 import '../../../../client/customStyles/General';
 import { getFormattedDate } from '/imports/client/core/utils/dateFormatter';
 
-export default class PostData extends React.Component {
+class PostData extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render () {
+
+    let rep;
+
+    if (this.props.user) {
+      rep = (
+        <div>
+          <Icon name='star' size='big' /> {this.props.user.profile.rep}
+        </div>
+      )
+    }
+
+
     return (
        <Grid stackable padded style={{color: '#1B1C1D'}}>
           <Grid.Row className='post-style'>
             <Grid.Column width={4} verticalAlign='middle'>
               <Icon id='thumb' name='thumbs up' size='large' /> {this.props.post.likeCount}
               <Icon id='clip' name='attach' size='large' /> {this.props.post.attachmentNumber}
+              <Icon id='comment' name="comment" size="large" /> {this.props.post.comments.length}
               <Card.Meta>
                 <span className='date'>
                   {getFormattedDate(this.props.post.createdDate)}
@@ -36,7 +50,10 @@ export default class PostData extends React.Component {
             </Grid.Column>
             <Grid.Column width={2} verticalAlign='middle' textAlign='right'>
               <Item>
-                <Item.Content>{this.props.post.createdBy}</Item.Content>
+                <Item.Content>
+                  {this.props.post.createdBy}
+                  {rep}                  
+                </Item.Content>
               </Item>
             </Grid.Column>
           </Grid.Row>
@@ -44,3 +61,10 @@ export default class PostData extends React.Component {
     )
   }
 }
+
+
+export default PostDataContainer = createContainer((props) => {
+  let user = Meteor.users.findOne({username: props.post.createdBy});
+  console.log(user);
+  return {user};
+}, PostData);
