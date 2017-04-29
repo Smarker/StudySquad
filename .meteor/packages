@@ -24,3 +24,5 @@ semantic:ui
 juliancwirko:postcss
 less
 jquery
+aldeed:simple-schema
+aldeed:collection2-core@2.0.0
