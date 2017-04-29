@@ -28,7 +28,7 @@ class NavBar extends React.Component {
       <Menu icon='labeled' fixed='top' className='nav-style'>
         <Menu.Item as={Link} to='/'>Our Company</Menu.Item>
         <Menu.Item as={Link} to='/'>
-          <Icon name='dashboard' size='huge' />
+          <Icon name='help circle' size='huge' />
           Get help
         </Menu.Item>
         <Menu.Item as={Link} to={ADD_POST_ROUTE}>
