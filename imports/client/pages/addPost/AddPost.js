@@ -38,7 +38,7 @@ class AddPost extends React.Component {
         schools: nextProps.schools,
         classes: nextProps.classes,
         school: '',
-        class: '',
+        clas: '',
         title: '',
         description: '',
         documents: [],
@@ -59,8 +59,7 @@ class AddPost extends React.Component {
     //   Schools.insert({name: this.state.school, class: [this.state.class]})
     // }
 
-    if(!this.state.school || !this.state.class || !this.state.title || !this.state.description) {
-      console.log("sup");
+    if(!this.state.school || !this.state.clas || !this.state.title || !this.state.description) {
       this.setState({alert: {alertVisible: true, message: 'All required fields must be filled in'}});
     }  else if(this.state.documents.length == 0){
       this.setState({alert: {alertVisible: true, message: 'Please upload at least one document'}});
@@ -73,15 +72,15 @@ class AddPost extends React.Component {
             description: this.state.description, 
             likes: [], 
             likeCount: 0,
-            attachmentNumber: 0, 
+            attachmentNumber: this.state.documents.length, 
             school: this.state.school, 
-            class: this.state.class, 
+            class: this.state.clas, 
             createdDate: new Date(), 
             createdBy: Meteor.user().username, 
             documents:this.state.documents,
             comments: []
         });
-        this.setState({title: '', class: '', description: '', school: '', clas: '', alert: {alertVisible: true, message: 'Saved Successfully'}});
+        this.setState({title: '', description: '', school: '', clas: '', documents: [], alert: {alertVisible: true, message: 'Saved Successfully'}});
       } else {
         this.setState({alert: {alertVisible: true, message: 'You have to be logged in before you submit a post.'}});
       }
@@ -230,7 +229,7 @@ class AddPost extends React.Component {
               options={classOptions}
               value={this.state.clas}
               onAddItem={this.onAddClass}
-              onChange={(event, props) => this.handleChange('class', props.value)} />
+              onChange={(event, props) => this.handleChange('clas', props.value)} />
           </Form.Field>
         </Form.Group>
         <Form.Group>

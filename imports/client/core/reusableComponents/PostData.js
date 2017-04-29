@@ -14,7 +14,7 @@ export default class PostData extends React.Component {
        <Grid stackable padded style={{color: '#1B1C1D'}}>
           <Grid.Row className='post-style'>
             <Grid.Column width={4} verticalAlign='middle'>
-              <Icon id='thumb' name='thumbs up' size='large' /> {this.props.post.likes}
+              <Icon id='thumb' name='thumbs up' size='large' /> {this.props.post.likeCount}
               <Icon id='clip' name='attach' size='large' /> {this.props.post.attachmentNumber}
               <Card.Meta>
                 <span className='date'>
