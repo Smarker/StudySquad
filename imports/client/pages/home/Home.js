@@ -162,7 +162,7 @@ class Home extends React.Component {
 let HomeContainer = createContainer((props) => {
   let schools = Schools.find({}).fetch();
 
-  let posts = Posts.find({}, {sort: {createdDate: 1}, limit: 5}).fetch();
+  let posts = Posts.find({}, {sort: {createdDate: -1}, limit: 5}).fetch();
 
 
   const schoolOptions = [];

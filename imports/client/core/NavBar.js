@@ -4,12 +4,14 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Link } from 'react-router';
 import { Menu, Icon, Input } from 'semantic-ui-react'
 import { handleChange } from '/imports/client/core/utils/formHelpers';
+
 import LOGIN_ROUTE from '/imports/client/pages/login/routes';
 // import SIGN_UP_ROUTE from '/imports/client/pages/signUp/routes';
 import ADD_POST_ROUTE from '/imports/client/pages/addPost/routes';
 import POST_ROUTE from '/imports/client/pages/post/routes';
 import SEARCH_RESULTS from '/imports/client/pages/searchResults/routes';
 import '../../../client/customStyles/Nav';
+import '/client/customStyles/General';
 
 class NavBar extends React.Component {
   constructor (props) {
@@ -40,7 +42,9 @@ class NavBar extends React.Component {
 
     return (
       <Menu icon='labeled' fixed='top' className='nav-style'>
-        <Menu.Item as={Link} to='/'>Our Company</Menu.Item>
+        <Menu.Item as={Link} to='/'>
+          <Image src='/orangeSquid.png' size='small' id='logo-style' />
+        </Menu.Item>
         <Menu.Item as={Link} to='/'>
           <Icon name='help circle' size='huge' />
           Get help

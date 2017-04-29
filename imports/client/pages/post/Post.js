@@ -62,9 +62,9 @@ import NavSearchResults from '/imports/client/core/reusableComponents/NavSearchR
       if (this.props.post.documents) {
         documents = this.props.post.documents.map((document) => {
       return (     <div key={document.name}>
-        
-    <List.Item href={document.base64} target="_blank">{document.name}</List.Item>
-    </div>)
+                      <List.Item href={document.base64} target="_blank">{document.name}</List.Item>
+                   </div>
+             )
         })
       }
       
@@ -72,6 +72,9 @@ import NavSearchResults from '/imports/client/core/reusableComponents/NavSearchR
         <div>
           <PostDetail post={this.props.post} />
           <List bulleted>
+            <Header dividing size='large'>
+              {'Attachments ' + '(' + this.props.post.attachmentNumber + ')'}  
+            </Header>
             {documents}
           </List>
           <Header dividing size='large'>

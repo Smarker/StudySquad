@@ -35,16 +35,33 @@ class AddPost extends React.Component {
   componentWillReceiveProps(nextProps) {
 
     if(this.props != nextProps) {
-      this.state = {
-        schools: nextProps.schools,
-        classes: nextProps.classes,
-        school: '',
-        clas: '',
-        title: '',
-        description: '',
-        documents: [],
-        alert: {alertVisible: false, message: null, color: null}
-      }
+
+      this.setState((prevState, props) => {
+        if(prevState.alert.alertVisible == true) {
+          return {
+             schools: nextProps.schools,
+             classes: nextProps.classes,
+             school: '',
+             clas: '',
+             title: '',
+             description: '',
+             documents: [],
+             loading: false,
+          }
+        } else {
+          return {
+            schools: nextProps.schools,
+            classes: nextProps.classes,
+            school: '',
+            clas: '',
+            title: '',
+            description: '',
+            documents: [],
+            loading: false,
+            alert: {alertVisible: false, message: null, color: null}
+          }
+        }
+      })
     }
   }
 
@@ -199,6 +216,8 @@ class AddPost extends React.Component {
                 <Table.Cell>{document.name}</Table.Cell>
               </Table.Row> 
     });
+
+    console.log(this.state.alert);
 
     return (
     

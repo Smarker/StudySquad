@@ -6,3 +6,12 @@ h1 {
 #profilePic {
   margin: 0
 }
+
+.ui.bulleted.list {
+  margin-left:0px !important;
+}
+
+
+#logo-style {
+  margin-top:5px;
+}
