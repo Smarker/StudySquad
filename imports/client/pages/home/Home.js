@@ -16,6 +16,7 @@ class Home extends React.Component {
     super(props);
 
     this.state = {
+      isOpen: true,
       school: '', //selected school from dropdown
       subject: '', //selected subject from dropdown
       schools: props.schools, //from mongo
@@ -103,7 +104,6 @@ class Home extends React.Component {
                   <Form.Field width={4}>
                     <label className='searchHeaderText'>Study At</label>
                     <Dropdown
-                      defaultValue="Rutgers"
                       search selection
                       options={this.state.schoolOptions}
                       name="school"
