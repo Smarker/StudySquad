@@ -50,10 +50,10 @@
     "transition": true,
     "visibility": true,
     "visit": true
-  },
+  }, 
   "themes": {
     "amazon": false,
-    "basic": true,
+    "basic": false,
     "bookish": false,
     "bootstrap3": false,
     "chubby": false,
