@@ -28,9 +28,9 @@ class SearchResults extends React.Component {
   sort (sortValue) {
     let options = {sort: {}};
     if (sortValue === 'newest') {
-      options.sort.createdDate = 1;
-    } else if (sortValue === 'oldest') {
       options.sort.createdDate = -1;
+    } else if (sortValue === 'oldest') {
+      options.sort.createdDate = 1;
     } else if (sortValue === 'likes') {
       options.sort.likeCount = 1;
     }
@@ -79,10 +79,12 @@ class SearchResults extends React.Component {
 }
 
 let SearchResultsContainer = createContainer((props) => {
+     let options = {sort: {}};
+      options.sort.createdDate = -1;
   return {
     schoolName: props.params.schoolName,
     className: props.params.className, 
-    searchResults: Posts.find({school: props.params.schoolName, class: props.params.className}).fetch()
+    searchResults: Posts.find({school: props.params.schoolName, class: props.params.className}, options).fetch()
   }
 }, SearchResults);
 
