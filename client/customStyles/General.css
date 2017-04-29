@@ -10,3 +10,8 @@ h1 {
 .ui.bulleted.list {
   margin-left:0px !important;
 }
+
+
+#logo-style {
+  margin-top:5px;
+}

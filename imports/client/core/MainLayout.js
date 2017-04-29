@@ -20,7 +20,7 @@ class MainLayout extends React.Component {
   render () { 
     return (
       <Grid columns={1}>
-        <Grid.Column>
+        <Grid.Column verticalAlign='middle'>
           <NavBar setNavBarHeight={this.setNavBarHeight} />
         </Grid.Column>
         <Grid.Column style={{paddingTop: this.state.navBarHeight, paddingLeft: '2em', paddingRight: '2em'}}>
