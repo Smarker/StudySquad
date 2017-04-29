@@ -34,10 +34,9 @@ export default class PostData extends React.Component {
                 {this.props.post.description}
               </Card.Description>
             </Grid.Column>
-            <Grid.Column width={2}>
+            <Grid.Column width={2} verticalAlign='middle' textAlign='right'>
               <Item>
-                <Item.Image size='tiny' src='/assets/images/wireframe/image.png' />
-                <Item.Content verticalAlign='middle'>{this.props.post.createdBy}</Item.Content>
+                <Item.Content>{this.props.post.createdBy}</Item.Content>
               </Item>
             </Grid.Column>
           </Grid.Row>

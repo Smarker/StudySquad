@@ -69,8 +69,6 @@ class Home extends React.Component {
   }
 
   handleSubmit(event) {
-    alert("Selected " + this.state.school
-      + " and " + this.state.subject);
     browserHistory.push('/search/' + this.state.school + '/' + this.state.subject);
     event.preventDefault();
   }
