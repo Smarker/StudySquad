@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Card, Icon, Image, Item, Label } from 'semantic-ui-react';
+import '../../../../client/customStyles/Post';
 
 export default class PostData extends React.Component {
   constructor(props) {

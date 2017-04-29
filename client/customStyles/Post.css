@@ -1,0 +1,8 @@
+/* CSS declarations go here */
+a {
+  color: #303036 !important;
+}
+
+a:hover {
+  color: #FC5130 !important;
+}
