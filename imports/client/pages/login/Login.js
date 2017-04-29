@@ -35,7 +35,7 @@ export default class SignUp extends React.Component {
           label='Enter username'
           type='text'
           value={this.state.username}
-          onChange={(event) => handleChange(this, 'username', event.target.value)} />
+          onChange={(event) => handleChange(this, 'username', event.target.value) } />
         <Form.Input
           label='Enter Password'
           type='password' 
