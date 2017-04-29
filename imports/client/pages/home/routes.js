@@ -3,6 +3,6 @@
 import React from 'react';
 import { IndexRoute } from 'react-router';
 import pages from '../pages';
-import Home from './Home';
+import HomeContainer from './Home';
 
-pages.push(<IndexRoute key='index' component={Home} />);
+pages.push(<IndexRoute key='index' component={HomeContainer} />);
