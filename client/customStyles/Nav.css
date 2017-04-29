@@ -1,3 +1,7 @@
 .nav-style {
   background: #30BCED !important;
 }
+
+.nav-style a:hover {
+  color: #FC5130 !important;
+} 

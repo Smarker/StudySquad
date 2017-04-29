@@ -1,6 +1,6 @@
 'use strict'
 import React from 'react';
-import { Grid, Header, Divider, Comment, Form, Button } from 'semantic-ui-react'
+import { Grid, Header, Divider, Comment, Form, Button, Container, List } from 'semantic-ui-react'
 import { createContainer } from 'meteor/react-meteor-data';
 import { getFormattedDate } from '/imports/client/core/utils/dateFormatter';
 import { handleChange } from '/imports/client/core/utils/formHelpers';
@@ -37,25 +37,36 @@ import Posts from '/collections/PostSchema';
           </Comment>
         )
       });
+
+      let documents = [];
+
+      if (this.props.post.documents) {
+        documents = this.props.post.documents.map((document) => {
+          return <List.Item href='#'>document.name</List.Item>;
+        })
+      }
       
       return (
         <div>
           <PostDetail post={this.props.post} />
-          <p>
-            FILES HERE
-          </p>
+          <List bulleted>
+            {documents}
+          </List>
           <Header dividing size='large'>
             Comments
           </Header>
-          <Comment.Group>
-            {comments}
-            <Form reply onSubmit={this.addComment}>
-              <Form.TextArea 
-                value={this.state.comment}
-                onChange={(event) => handleChange(this, 'comment', event.target.value) } />
-              <Button content='Add Comment' labelPosition='left' icon='edit' primary />
-            </Form>
-          </Comment.Group>
+          <Container text>
+            <Comment.Group>
+              {comments}
+              <Form reply onSubmit={this.addComment}>
+                <Form.TextArea 
+                  value={this.state.comment}
+                  onChange={(event) => handleChange(this, 'comment', event.target.value) } />
+                <Button content='Add Comment' labelPosition='left' icon='edit' primary />
+              </Form>
+            </Comment.Group>
+          </Container>
+          
         </div>
       )
     }
@@ -68,7 +79,7 @@ let PostContainer = createContainer((props) => {
   return {
     post: {
       title: 'yo',
-      description: 'fjdasl;kfjdlksafjdslkajfldsajfkljdsflkdsajfkldsjafljdsfajhsdkjafhdsahfdsafdsahfjdsajfdsahfjkdsahfjdsajfdsaffjdsalkfjdsaklfjdsalkfjdsalkfdsajfkdsajfdklsfjdklasjfdkslfjdsalk',
+      description: 'fjdklas fjdsa jfdksla jfdlksa jfdklsa fjdklsa fjdlkafj dlsakfjdl fjad alsf jlkdsaf jlkd sjaflksdaf jdklsa fjdklsajf kdljfdk d djdkfjdks ajfkd sajfk dsajkfd jsakfd jsaklfjdlks ajfdk lsa kdl asjflk dsa jfdlksa jfkldsa jfkdsllaj kl jklj klj lk jlkj lkjlkj lkjlk  jlkj lk jkljkl jkl jlkjlkjlkjklj lkj ',
       likes: 5,
       comments: [
         {username: 'bob', comment: 'fjdlkasjfkldsajfldkasfda', createdDate: new Date()},

@@ -11,7 +11,7 @@ export default class PostItem extends React.Component {
   render() {
     return (
       <Card fluid as={Link} to={"/post/1"}>
-        <PostData />
+        <PostData post={this.props.post} />
       </Card>
     );
   }
