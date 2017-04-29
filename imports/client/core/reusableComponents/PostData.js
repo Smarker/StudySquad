@@ -7,6 +7,7 @@ export default class PostData extends React.Component {
   constructor(props) {
     super(props);
   }
+
   render () {
     return (
        <Grid stackable padded>
@@ -19,8 +20,8 @@ export default class PostData extends React.Component {
                   4/28/17
                 </span>
               </Card.Meta>
-              <Label tag>Rutgers</Label>
-              <Label tag>CS111</Label>
+              <Label tag>{this.props.school}</Label>
+              <Label tag>{this.props.class}</Label>
             </Grid.Column>
             <Grid.Column width={4} verticalAlign='middle' className='title-desc'>
               <Card.Header as='h1' id='title'>
