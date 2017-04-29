@@ -2,5 +2,5 @@
 import React from 'react';
 
 export default function Post (props) {
-  return 'post';
+  return <div>post</div>;
 }

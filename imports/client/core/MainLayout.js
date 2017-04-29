@@ -3,7 +3,8 @@ import { Grid, Container, Dropdown } from 'semantic-ui-react';
 
 class MainLayout extends React.Component {
 
-  return () {
+  render () {
+    return (
     <Grid columns={1}>
       <Grid.Column>
         navbar
@@ -12,6 +13,11 @@ class MainLayout extends React.Component {
         {this.props.children}
       </Grid.Column>
     </Grid>
+    )
+
   }
 
 }
+
+
+export default MainLayout;

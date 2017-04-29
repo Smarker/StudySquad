@@ -2,5 +2,5 @@
 import React from 'react';
 
 export default function SearchResults (props) {
-  return 'search results';
+  return <div>search results</div>;
 }

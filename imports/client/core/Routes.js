@@ -1,18 +1,18 @@
 'use strict';
 import React from 'react';
-import { Router, Route, browserHistory } from 'react-router';
-import '/imports/client/pages/pages'
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+import MainLayout from './MainLayout';
 import '/imports/client/pages/home/routes';
 import '/imports/client/pages/login/routes';
 import '/imports/client/pages/post/routes';
 import '/imports/client/pages/searchResults/routes';
-
-import MainLayout from '../MainLayout';
+import pages from '/imports/client/pages/pages'
 
 const Routes = (
   <Router history={browserHistory}>
-    <Route path='/' component={MainLayout} />
-    {pages}
+    <Route path='/' component={MainLayout}>
+      {pages}
+    </Route>
   </Router>
 )
 
