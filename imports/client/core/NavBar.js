@@ -19,7 +19,7 @@ class NavBar extends React.Component {
 
     let user = (
       <div>
-        <Icon name='sign in' size='huge' />
+        <Icon name='sign in' size='big' />
         Login
       </div>
     )
@@ -35,8 +35,15 @@ class NavBar extends React.Component {
           <Icon name='sticky note outline' size='huge' />
           Add post
         </Menu.Item>
-        <Menu.Item position='right' as={Link} to={LOGIN_ROUTE}>
-          {this.props.user ? this.props.user.username : user}
+        <Menu.Item position='right' as={Link} to={LOGIN_ROUTE} style={{flexDirection: 'row'}}>
+          {this.props.user ? 
+          <div>
+            {this.props.user.username}
+            <Icon name='star' size='big' /> {this.props.user.profile.rep}
+          </div>
+
+          : user}
+           
         </Menu.Item>
       </Menu>
     )

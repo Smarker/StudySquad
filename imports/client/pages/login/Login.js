@@ -28,7 +28,10 @@ export default class SignUp extends React.Component {
     event.preventDefault();
     Accounts.createUser({
       username: this.state.username,
-      password: this.state.password
+      password: this.state.password,
+      profile: {
+        rep: 0
+      }
     })
   }
 
