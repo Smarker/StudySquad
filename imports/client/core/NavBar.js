@@ -26,7 +26,7 @@ class NavBar extends React.Component {
 
     return (
       <Menu icon='labeled' fixed='top' className='nav-style'>
-        <Menu.Item header>Our Company</Menu.Item>
+        <Menu.Item as={Link} to='/'>Our Company</Menu.Item>
         <Menu.Item as={Link} to='/'>
           <Icon name='dashboard' size='huge' />
           Get help

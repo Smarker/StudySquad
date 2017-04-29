@@ -68,7 +68,7 @@ class AddPost extends React.Component {
     else {
       
       if(Meteor.user()) {
-        Posts.insert({title: this.state.title, description: this.state.description, likes: 0, attachmentNumber: 0, school: this.state.school, class: this.state.class, createdDate: new Date(), createdBy: Meteor.user().username, documents:this.state.documents});
+        Posts.insert({title: this.state.title, description: this.state.description, likes: 0, attachmentNumber: 0, school: this.state.school, class: this.state.class, createdDate: new Date(), createdBy: Meteor.user().username, documents:this.state.documents, comments: []});
         this.setState({title: '', class: '', description: '', school: '', clas: '', alert: {alertVisible: true, message: 'Saved Successfully'}});
       } else {
         this.setState({alert: {alertVisible: true, message: 'You have to be logged in before you submit a post.'}});
