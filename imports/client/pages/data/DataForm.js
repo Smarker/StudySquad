@@ -1,14 +1,14 @@
 import React from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { handleChange } from '/imports/client/core/utils/formHelpers';
-import Universities from '/imports/collections/University';
+import Schools from '/imports/collections/SchoolSchema';
 
 export default class DataForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      university: '',
+      school: '',
       class: ''
     };
 
@@ -16,17 +16,17 @@ export default class DataForm extends React.Component {
   }
 
   handleSubmit(e) {
-    console.log("You inserted: " + this.state.university + " " + this.state.class);
+    console.log("You inserted: " + this.state.school + " " + this.state.class);
 
     /*
-    check if the university exists in mongo
+    check if the school exists in mongo
       if yes
         insert class in the array
       else 
-        create new university state pair in mongo
+        create new school state pair in mongo
     */
 
-    console.log("you should see nothing " + db.Universities.find({}));
+    console.log("you should see nothing " + db.Schools.find({}));
 
     e.preventDefault();
   }
@@ -35,12 +35,12 @@ export default class DataForm extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Field>
-          <label>University</label>
+          <label>School</label>
           <input 
-            placeholder='University'
+            placeholder='School'
             type='text'
-            value={this.state.university}
-            onChange={(event) => handleChange(this, 'university', event.target.value)}/>
+            value={this.state.school}
+            onChange={(event) => handleChange(this, 'school', event.target.value)}/>
         </Form.Field>
         <Form.Field>
           <label>Class</label>
