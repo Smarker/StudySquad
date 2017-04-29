@@ -1,1 +1,4 @@
 /* Add general css like text styles, etc. */
+h1 {
+  margin-bottom:0;
+}
