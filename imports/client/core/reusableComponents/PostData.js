@@ -16,6 +16,7 @@ export default class PostData extends React.Component {
             <Grid.Column width={4} verticalAlign='middle'>
               <Icon id='thumb' name='thumbs up' size='large' /> {this.props.post.likeCount}
               <Icon id='clip' name='attach' size='large' /> {this.props.post.attachmentNumber}
+              <Icon id='comment' name="comment" size="large" /> {this.props.post.comments.length}
               <Card.Meta>
                 <span className='date'>
                   {getFormattedDate(this.props.post.createdDate)}
