@@ -38,7 +38,7 @@ class AddPost extends React.Component {
         schools: nextProps.schools,
         classes: nextProps.classes,
         school: '',
-        class: '',
+        clas: '',
         title: '',
         description: '',
         documents: [],
@@ -60,7 +60,6 @@ class AddPost extends React.Component {
     // }
 
     if(!this.state.school || !this.state.class || !this.state.title || !this.state.description) {
-      console.log("sup");
       this.setState({alert: {alertVisible: true, message: 'All required fields must be filled in'}});
     }  else if(this.state.documents.length == 0){
       this.setState({alert: {alertVisible: true, message: 'Please upload at least one document'}});
@@ -69,7 +68,7 @@ class AddPost extends React.Component {
       
       if(Meteor.user()) {
         Posts.insert({title: this.state.title, description: this.state.description, likes: 0, attachmentNumber: 0, school: this.state.school, class: this.state.class, createdDate: new Date(), createdBy: Meteor.user().username, documents:this.state.documents, comments: []});
-        this.setState({title: '', class: '', description: '', school: '', clas: '', alert: {alertVisible: true, message: 'Saved Successfully'}});
+        this.setState({title: '', description: '', school: '', clas: '', alert: {alertVisible: true, message: 'Saved Successfully'}});
       } else {
         this.setState({alert: {alertVisible: true, message: 'You have to be logged in before you submit a post.'}});
       }
