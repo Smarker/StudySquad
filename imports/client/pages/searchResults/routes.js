@@ -5,7 +5,7 @@ import { Route } from 'react-router';
 import pages from '../pages';
 import SearchResults from './SearchResults';
 
-const SEARCH_RESULTS = '/search/:schoolId/:classId';
+const SEARCH_RESULTS = '/search/:schoolName/:className';
 
 pages.push(<Route key={SEARCH_RESULTS} path ={SEARCH_RESULTS} component={SearchResults} />);
 

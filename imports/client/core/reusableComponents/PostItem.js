@@ -1,5 +1,6 @@
 import React from 'react';
-import { Grid, Card, Icon, Image, Item } from 'semantic-ui-react'
+import { Grid, Card, Icon, Image, Item, Label } from 'semantic-ui-react';
+import { Link } from 'react-router';
 
 export default class PostItem extends React.Component {
   constructor(props) {
@@ -8,7 +9,7 @@ export default class PostItem extends React.Component {
 
   render() {
     return (
-      <Card fluid>
+      <Card fluid as={Link} to={"/post/1"}>
         <Grid stackable>
           <Grid.Row>
             <Grid.Column width={2} verticalAlign='middle' textAlign='center'>
@@ -24,7 +25,8 @@ export default class PostItem extends React.Component {
                   4/28/17
                 </span>
               </Card.Meta>
-              tags here
+              <Label>Rutgers</Label>
+              <Label>CS111</Label>
             </Grid.Column>
             <Grid.Column width={8} verticalAlign='middle'>
               <Card.Description>
