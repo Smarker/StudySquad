@@ -1,6 +1,6 @@
 'use strict'
 import React from 'react';
-import { Form, Button, Dropdown, Message } from 'semantic-ui-react';
+import { Form, Button, Dropdown, Message, Dimmer, Loader, Table, Icon } from 'semantic-ui-react';
 import { handleChange } from '/imports/client/core/utils/formHelpers';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Random } from 'meteor/random'
@@ -17,6 +17,8 @@ class AddPost extends React.Component {
       class: '',
       title: '',
       description: '',
+      documents: [],
+      loading: false,
       alert: {alertVisible: false, message: null}
     }
     this.onAddSchool = this.onAddSchool.bind(this);
@@ -25,6 +27,7 @@ class AddPost extends React.Component {
     this.submit = this.submit.bind(this);
     this.handleDismiss = this.handleDismiss.bind(this);
     this.onFileChange = this.onFileChange.bind(this);
+    this.removeCell = this.removeCell.bind(this);
 
   }
 
@@ -38,6 +41,7 @@ class AddPost extends React.Component {
         class: '',
         title: '',
         description: '',
+        documents: [],
         alert: {alertVisible: false, message: null}
       }
     }
@@ -58,10 +62,13 @@ class AddPost extends React.Component {
     if(!this.state.school || !this.state.class || !this.state.title || !this.state.description) {
       console.log("sup");
       this.setState({alert: {alertVisible: true, message: 'All required fields must be filled in'}});
-    } else {
+    }  else if(this.state.documents.length == 0){
+      this.setState({alert: {alertVisible: true, message: 'Please upload at least one document'}});
+    }
+    else {
       
       if(Meteor.user()) {
-        Posts.insert({title: this.state.title, description: this.state.description, likes: 0, attachmentNumber: 0, school: this.state.school, class: this.state.class, createdDate: new Date(), createdBy: Meteor.user().username});
+        Posts.insert({title: this.state.title, description: this.state.description, likes: 0, attachmentNumber: 0, school: this.state.school, class: this.state.class, createdDate: new Date(), createdBy: Meteor.user().username, documents:this.state.documents});
         this.setState({title: '', class: '', description: '', school: '', clas: '', alert: {alertVisible: true, message: 'Saved Successfully'}});
       } else {
         this.setState({alert: {alertVisible: true, message: 'You have to be logged in before you submit a post.'}});
@@ -116,7 +123,40 @@ class AddPost extends React.Component {
   }
 
   onFileChange(event) {
-    console.log(event.target.files[0]);
+    let file = event.target.files[0];
+    // FileReader function for read the file.
+    var fileReader = new FileReader();
+    var base64;
+    // Onload of file read the file content
+    this.setState({loading: true});
+    fileReader.onload = (function(theFile, currentState){
+    var fileName = theFile.name;
+    return function(e){
+      base64 = e.target.result;
+      let array = currentState.state.documents.slice();
+      array.push({
+        name: fileName,
+        base64: base64
+      })  
+      currentState.setState({loading: false, documents: array});
+      document.getElementById('uploadPDF').value = '';
+    };
+    })(file, this);   
+    // Convert data to base64
+    fileReader.readAsDataURL(file);
+  }
+
+  removeCell(event) {
+    event.preventDefault();
+    let documentsArray = this.state.documents.slice(0);
+
+    for(let i = 0; i < documentsArray.length; i++) {
+      if(documentsArray[i].name == event.currentTarget.value) {
+        documentsArray.splice(i, 1);
+        break;
+      }
+    }
+    this.setState({documents: documentsArray});
   }
 
   render () {
@@ -134,9 +174,20 @@ class AddPost extends React.Component {
       }
     });
 
+    let documentTable = this.state.documents.map((document) => {
+      return <Table.Row key={document.name}>
+                <Table.Cell> <Button icon value={document.name} onClick={this.removeCell}> <Icon name='delete' /></Button></Table.Cell>
+                <Table.Cell>{document.name}</Table.Cell>
+              </Table.Row> 
+    });
+
     return (
     
-      <Form>  
+      <Form onSubmit={this.submit}>  
+        {this.state.loading &&
+        <Dimmer active inverted>
+          <Loader size='medium'>Loading</Loader>
+        </Dimmer>}
         {this.state.alert.alertVisible &&
         <Message
           onDismiss={this.handleDismiss}
@@ -193,11 +244,27 @@ class AddPost extends React.Component {
         <Form.Group>
           <label htmlFor="file">Load pdf: </label>&nbsp;
             <input
-              type="file"
+              type="file" id='uploadPDF'
               onChange={this.onFileChange}
             />
         </Form.Group>
-         <Button type='submit' positive floated='right' onClick={this.submit}>Submit</Button>
+        
+        <Form.Group>
+        <Table size='small'>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Delete</Table.HeaderCell>
+              <Table.HeaderCell>Name</Table.HeaderCell>
+              </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {documentTable}
+                </Table.Body>
+            
+        </Table>
+        </Form.Group>
+
+         <Button type='submit' positive floated='right'>Submit</Button>
       </Form>
     )
   }
