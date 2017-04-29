@@ -15,9 +15,6 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log("school opts from constructor");
-    console.log(props.schoolOptions);
-
     this.state = {
       school: '', //selected school from dropdown
       subject: '', //selected subject from dropdown
@@ -43,6 +40,7 @@ class Home extends React.Component {
     }
   }
 
+  //http://stackoverflow.com/questions/13964155/get-javascript-object-from-array-of-objects-by-value-or-property
   handleChange(property, value) {
     let obj = {};
 
@@ -50,14 +48,9 @@ class Home extends React.Component {
 
     this.setState(obj);
     if ('school' === property) {
-      //http://stackoverflow.com/questions/13964155/get-javascript-object-from-array-of-objects-by-value-or-property
       let s = this.state.schools.find(school => school.name === value); //single school we found
 
       let classes = s.classes;
-      console.log("schools: " + this.state.schools);
-      console.log("classes yo");
-      console.log(classes);
-
       let classOpt = [];
 
       classes.map((c) => (
@@ -96,30 +89,6 @@ class Home extends React.Component {
   }
 
   render() {
-    /*
-    const subjectOptions = [
-      {
-        key: "CS111",
-        value: "CS111",
-        text: "CS111"
-      },
-      {
-        key: "Mathematics",
-        value: "Mathematics",
-        text: "Mathematics"
-      },
-      {
-        key: "Organic Chemisty",
-        value: "Organic Chemisty",
-        text: "Organic Chemisty"
-      },
-      {
-        key: "Astronomy",
-        value: "Astronomy",
-        text: "Astronomy"
-      }
-    ];
-    */
     return (
       <Grid columns={1}>
         <Grid.Column className='searchHeader'
@@ -133,7 +102,8 @@ class Home extends React.Component {
                   <Form.Field width={2} />
                   <Form.Field width={4}>
                     <label className='searchHeaderText'>Study At</label>
-                    <Dropdown placeholder="School"
+                    <Dropdown
+                      defaultValue="Rutgers"
                       search selection
                       options={this.state.schoolOptions}
                       name="school"
@@ -161,12 +131,6 @@ class Home extends React.Component {
               </Form>
             </Grid.Column>
           </Grid>
-
-
-
-
-
-
         </Grid.Column>
         <Grid.Column>
         </Grid.Column>
@@ -188,9 +152,6 @@ let HomeContainer = createContainer((props) => {
       text: school.name
     }))
   );
-
-  console.log("schoolOptions:");
-  console.log(schoolOptions);
 
   return {
     schools: schools,
