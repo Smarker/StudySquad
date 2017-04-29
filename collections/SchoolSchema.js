@@ -4,7 +4,7 @@ import SimpleSchema from 'simpl-schema';
 // import schema from './CommonSchema';
 import { Mongo } from 'meteor/mongo';
 
-const Schools = new Mongo.Collection('Schools');
+const Schools = new Mongo.Collection('Universities');
 // console.log(schema.subject);
 // const University = new SimpleSchema({
 //   name: {

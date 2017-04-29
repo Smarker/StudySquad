@@ -1,4 +1,4 @@
-'use strict'
+/*'use strict'
 import React from 'react';
 import { Form, Button } from 'semantic-ui-react';
 import { handleChange } from '/imports/client/core/utils/formHelpers';
@@ -39,4 +39,4 @@ export default class SignUp extends React.Component {
       </Form>
     )
   }
-}
+}*/
