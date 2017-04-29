@@ -58,6 +58,9 @@ const Post = new SimpleSchema({
     type: String,
     label: 'Subject',
     optional: false
+  },
+  document: {
+    type: [schema.document]
   }
 })
 

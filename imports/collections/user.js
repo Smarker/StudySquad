@@ -19,7 +19,6 @@ User = new SimpleSchema({
     type: String,
     label: 'Email',
     optional: false
-    
   },
   password: {
     type: String,
