@@ -15,29 +15,26 @@ import Posts from '/collections/PostSchema';
         comment: '',
       }
       this.addComment = this.addComment.bind(this);
-      this.onClick = this.onClick.bind(this);
     }
-
-    addComment () {
-
-    }
-
-    onClick (event) {
-      console.log(event);
-      let pdf = event.currentTarget;
-      console.log(pdf);
-      //.replace('data:application/pdf;base64', 'data:application/octet-stream;base64');;
-      
-      // var dlnk = document.getElementById('dwnldLnk');
-      // dlnk.href = pdf;
-      window.location.replace(pdf.value);
-      dlnk.click();
+    addComment (event) {
+      event.preventDefault();
+      let post = Posts.findOne({_id: this.props.post._id});
+      let comments = post.comments;
+      comments.push({
+        username: Meteor.user().username,
+        comment: this.state.comment,
+        createdDate: new Date()
+      })
+     
+      Posts.update({_id: post._id}, {$set: {comments: comments}});
+      this.setState({comment: ''});
     }
 
     render () {
       let loading = true;
       if(this.props.post) {
       loading = false;
+      console.log(this.props.post);
       let comments = this.props.post.comments.map((comment, index) => {
         return (
           <Comment key={index}>
@@ -53,19 +50,13 @@ import Posts from '/collections/PostSchema';
         )
       });
     
-
       let documents = [];
-
-      
+  
       if (this.props.post.documents) {
         documents = this.props.post.documents.map((document) => {
-          // let newDocumentURL = document.base64.replace('data:application/pdf;base64', 'data:application/octet-stream;base64');
-          // console.log(newDocumentURL);
-          //return <a href={document.base64} key={document.name}>{document.name}</a>;
       return (     <div key={document.name}>
         
-    
-    <a href={document.base64} value={document.base64} title='o ficheirinho de tostas.pdf'>clica aqui oh sashavore</a>
+    <List.Item href={document.base64} target="_blank">{document.name}</List.Item>
     </div>)
         })
       }
