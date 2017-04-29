@@ -16,8 +16,6 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log("loading constructor for home");
-
     this.state = {
       posts: props.posts,
       school: '', //selected school from dropdown
@@ -156,8 +154,6 @@ class Home extends React.Component {
 
 
 let HomeContainer = createContainer((props) => {
-  console.log("in home container");
-
   let schools = Schools.find({}).fetch();
 
   let posts = Posts.find({}, {sort: {createdDate: 1}, limit: 5}).fetch();
@@ -172,8 +168,6 @@ let HomeContainer = createContainer((props) => {
       text: school.name
     }))
   );
-
-  console.log('schools', schools);
 
   return {
     posts,
