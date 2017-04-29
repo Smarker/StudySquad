@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Container, Dropdown } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import NavBar from './NavBar';
 
 class MainLayout extends React.Component {
@@ -17,7 +17,7 @@ class MainLayout extends React.Component {
     }
   }
 
-  render () {
+  render () { 
     return (
       <Grid columns={1}>
         <Grid.Column>
