@@ -35,9 +35,6 @@ class NavBar extends React.Component {
           <Icon name='sticky note outline' size='huge' />
           Add post
         </Menu.Item>
-        <Menu.Item position='right' style={{flexDirection: 'row'}}>
-          <Input icon='search' placeholder='search' />
-        </Menu.Item>
         <Menu.Item position='right' as={Link} to={LOGIN_ROUTE}>
           {this.props.user ? this.props.user.username : user}
         </Menu.Item>

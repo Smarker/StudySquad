@@ -1,6 +1,6 @@
 'use strict'
 import React from 'react';
-import { Header } from 'semantic-ui-react';
+import { Header, Grid, Divider, Dropdown} from 'semantic-ui-react';
 import { createContainer } from 'meteor/react-meteor-data';
 import PostItem from '../../core/reusableComponents/PostItem';
 
@@ -12,11 +12,34 @@ function SearchResults (props) {
     return <PostItem post={post} key={post._id} />;
   });
 
+  let sortOptions = [
+    {text: 'Date: Newest to oldest', value: 'newest'},
+    {text: 'Date: Oldest to to newest', value: 'oldest'},
+    {text: 'Likes: most to least', value: 'likes'},
+    {text: 'Name', value: 'name'},
+
+  ]
+
   return (
-    <div>
-      <Header as='h2'>{props.schoolName} {props.className}</Header>
-      {PostList}
-    </div>
+    <Grid columns={1}>
+      <Grid.Column width={3}>
+        <Header as='h3'>
+          {props.schoolName}, {props.className}
+        </Header>
+      </Grid.Column>
+      <Grid.Column width={3} floated='right'>
+        <Dropdown
+          inline
+          value={'newest'}
+          options={sortOptions} />
+      </Grid.Column>
+      <Grid.Column width={16} style={{paddingBottom: 0, paddingTop: 0}}>
+        <Divider style={{paddingTop: 0, paddingBottom: 0, marginBottom: 0, marginTop: 0}} />
+      </Grid.Column>
+      <Grid.Column width={16}>
+        {PostList}
+      </Grid.Column>
+    </Grid>
   );
 }
 
@@ -30,4 +53,3 @@ let SearchResultsContainer = createContainer((props) => {
 }, SearchResults);
 
 export default SearchResultsContainer;
-

@@ -1,6 +1,6 @@
 'use strict'
 import React from 'react';
-import { Form, Button, Dropdown, Message, Dimmer, Loader, Table, Icon } from 'semantic-ui-react';
+import { Form, Button, Dropdown, Message, Dimmer, Loader, Table, Icon, Input, Header } from 'semantic-ui-react';
 import { handleChange } from '/imports/client/core/utils/formHelpers';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Random } from 'meteor/random'
@@ -184,6 +184,9 @@ class AddPost extends React.Component {
     return (
     
       <Form onSubmit={this.submit}>  
+        <Header as='h3' dividing>
+          Add a post
+        </Header>
         {this.state.loading &&
         <Dimmer active inverted>
           <Loader size='medium'>Loading</Loader>
@@ -242,19 +245,22 @@ class AddPost extends React.Component {
         </Form.Group>
        
         <Form.Group>
-          <label htmlFor="file">Load pdf: </label>&nbsp;
-            <input
+          <Form.Field width={16}>
+            <label>Load pdf: </label>&nbsp;
+            <Input
               type="file" id='uploadPDF'
               onChange={this.onFileChange}
             />
+          </Form.Field>
+
         </Form.Group>
         
         <Form.Group>
         <Table size='small'>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Delete</Table.HeaderCell>
-              <Table.HeaderCell>Name</Table.HeaderCell>
+              <Table.HeaderCell width={12}>Delete</Table.HeaderCell>
+              <Table.HeaderCell width={14}>Name</Table.HeaderCell>
               </Table.Row>
               </Table.Header>
               <Table.Body>
@@ -264,7 +270,7 @@ class AddPost extends React.Component {
         </Table>
         </Form.Group>
 
-         <Button type='submit' positive floated='right'>Submit</Button>
+         <Button type='submit' primary floated='right'>Submit</Button>
       </Form>
     )
   }

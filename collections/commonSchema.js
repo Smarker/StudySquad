@@ -16,6 +16,7 @@ const schema = {};
 //     type: String,
 //     label: 'Document base64'
 //   }
+//  name: string
 // })
 
 export default schema;
