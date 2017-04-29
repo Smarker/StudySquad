@@ -1,16 +1,42 @@
 'use strict'
 import React from 'react';
+import { createContainer } from 'meteor/react-meteor-data';
+import Universities from '../../../collections/UniversitySchema';
+import PostData from '../../core/reusableComponents/PostData';
+import Posts from '../../../collections/PostSchema';
 
-export default class Post extends React.Component {
+ class Post extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {postID: props.location.pathname.split('/')};
+
+
+
   }
 
   render () {
     return (
     <div>
-    Post1
+       <PostData />
     </div>
     )
   }
 }
+
+
+let PostContainer = createContainer((props) => {
+  /*
+    find files
+    find comments
+    find title
+    find description
+  */
+  console.log(props.location.pathname.split('/'));
+
+  console.log(Posts.find().fetch());
+
+  return {files: 'Sup', comments: 'SUp'}
+}, Post)
+
+export default PostContainer;
