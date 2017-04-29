@@ -16,6 +16,7 @@ export default class DataForm extends React.Component {
   }
 
   handleSubmit(e) {
+    e.preventDefault();
     console.log("You inserted: " + this.state.school + " " + this.state.class);
 
     /*
@@ -27,8 +28,6 @@ export default class DataForm extends React.Component {
     */
 
     console.log("you should see nothing " + db.Schools.find({}));
-
-    e.preventDefault();
   }
   
   render() {
