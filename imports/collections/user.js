@@ -1,10 +1,9 @@
 'use strict'
 import { Meteor } from 'meteor/meteor';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema'
+import SimpleSchema from 'simpl-schema'
 import { Mongo } from 'meteor/mongo';
 
 User = new SimpleSchema({
-  _id: schema.ID,
   firstName: {
     type: String,
     label: 'First Name',
@@ -19,7 +18,6 @@ User = new SimpleSchema({
     type: String,
     label: 'Email',
     optional: false
-    
   },
   password: {
     type: String,
@@ -28,7 +26,7 @@ User = new SimpleSchema({
   },
   username: {
     type: String,
-    label: 'User',
+    label: 'Username',
     optional: false
   }
 });
