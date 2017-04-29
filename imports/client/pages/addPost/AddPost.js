@@ -72,6 +72,8 @@ class AddPost extends React.Component {
             description: this.state.description, 
             likes: [], 
             likeCount: 0,
+            flags: [],
+            flagCount: 0,
             attachmentNumber: this.state.documents.length, 
             school: this.state.school, 
             class: this.state.clas, 
