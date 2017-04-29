@@ -49,7 +49,7 @@ export default class DataForm extends React.Component {
             placeholder='School'
             type='text'
             value={this.state.school}
-            onChange={(event) => handleChange(this, 'school', event.target.value)}/>
+            onChange={(event) => handleChange(this, 'school', event.target.value.toLowerCase())}/>
         </Form.Field>
         <Form.Field>
           <label>Class</label>
@@ -57,7 +57,7 @@ export default class DataForm extends React.Component {
             placeholder='Class'
             type='text'
             value={this.state.class}
-            onChange={(event) => handleChange(this, 'class', event.target.value)}/>
+            onChange={(event) => handleChange(this, 'class', event.target.value.toLowerCase())}/>
         </Form.Field>
         <Button type='submit'>Submit</Button>
       </Form>

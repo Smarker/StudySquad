@@ -78,7 +78,8 @@ class AddPost extends React.Component {
             class: this.state.class, 
             createdDate: new Date(), 
             createdBy: Meteor.user().username, 
-            documents:this.state.documents
+            documents:this.state.documents,
+            comments: []
         });
         this.setState({title: '', class: '', description: '', school: '', clas: '', alert: {alertVisible: true, message: 'Saved Successfully'}});
       } else {

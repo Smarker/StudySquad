@@ -10,7 +10,7 @@ export default class PostItem extends React.Component {
 
   render() {
     return (
-      <Card fluid as={Link} to={"/post/2"}>
+      <Card fluid as={Link} to={"/post/" + this.props.post._id}>
         <PostData post={this.props.post} />
       </Card>
     );
