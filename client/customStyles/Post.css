@@ -1,0 +1,20 @@
+/* CSS declarations go here */
+a {
+  color: #303036 !important;
+}
+
+a:hover {
+  color: #FC5130 !important;
+}
+/*
+.post-style {
+  padding-top:1rem;
+  padding-bottom:1rem;
+  background-color: red;
+}
+*/
+
+.post-style {
+  background-color: #F3C969;
+  background-clip:content-box;
+}

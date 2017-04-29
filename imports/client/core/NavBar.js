@@ -8,6 +8,7 @@ import LOGIN_ROUTE from '/imports/client/pages/login/routes';
 import ADD_POST_ROUTE from '/imports/client/pages/addPost/routes';
 import POST_ROUTE from '/imports/client/pages/post/routes';
 import SEARCH_RESULTS from '/imports/client/pages/searchResults/routes';
+import '../../../client/customStyles/Nav';
 
 class NavBar extends React.Component {
   componentDidMount () {
@@ -24,7 +25,7 @@ class NavBar extends React.Component {
     )
 
     return (
-      <Menu icon='labeled' fixed='top'>
+      <Menu icon='labeled' fixed='top' className='nav-style'>
         <Menu.Item header>Our Company</Menu.Item>
         <Menu.Item as={Link} to='/'>
           <Icon name='dashboard' size='huge' />
