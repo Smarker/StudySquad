@@ -34,7 +34,6 @@ import Posts from '/collections/PostSchema';
       let loading = true;
       if(this.props.post) {
       loading = false;
-      console.log(this.props.post);
       let comments = this.props.post.comments.map((comment, index) => {
         return (
           <Comment key={index}>

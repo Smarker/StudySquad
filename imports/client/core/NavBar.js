@@ -46,7 +46,6 @@ class NavBar extends React.Component {
 
 export default NavBarContainer = createContainer((props) => {
   let user = Meteor.user();
-  console.log(user);
   return {user};
 }, NavBar);
 
