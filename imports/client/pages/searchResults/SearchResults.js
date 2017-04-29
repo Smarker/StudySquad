@@ -1,9 +1,12 @@
 'use strict'
 import React from 'react';
-import { Header } from 'semantic-ui-react'
+import { Header } from 'semantic-ui-react';
+import { createContainer } from 'meteor/react-meteor-data';
 import PostItem from '../../core/reusableComponents/PostItem';
 
-export default function SearchResults (props) {
+import Posts from '/collections/PostSchema';
+
+function SearchResults (props) {
   return (
     <div>
       <Header as='h2'>Rutgers Computer Science</Header>
@@ -13,3 +16,12 @@ export default function SearchResults (props) {
     </div>
   );
 }
+
+let SearchResultsContainer = createContainer((props) => {
+  return {
+    searchResults: Posts.find({school: props.params.schoolName, class: props.params.className}).fetch()
+  }
+}, SearchResults);
+
+export default SearchResultsContainer;
+
