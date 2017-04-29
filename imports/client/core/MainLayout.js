@@ -19,16 +19,15 @@ class MainLayout extends React.Component {
 
   render () {
     return (
-    <Grid columns={1}>
-      <Grid.Column>
-        <NavBar setNavBarHeight={this.setNavBarHeight} />
-      </Grid.Column>
-      <Grid.Column style={{paddingTop: this.state.navBarHeight}}>
-        {this.props.children}
-      </Grid.Column>
-    </Grid>
+      <Grid columns={1}>
+        <Grid.Column>
+          <NavBar setNavBarHeight={this.setNavBarHeight} />
+        </Grid.Column>
+        <Grid.Column style={{paddingTop: this.state.navBarHeight}}>
+          {this.props.children}
+        </Grid.Column>
+      </Grid>
     )
-
   }
 
 }
