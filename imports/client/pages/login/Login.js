@@ -16,8 +16,12 @@ export default class SignUp extends React.Component {
   }
 
   login (event) {
-    event.preventDefault;
-    Meteor.loginWithPassword(this.state.username, this.state.password);
+    event.preventDefault();
+    Meteor.logoutOtherClients();
+    Meteor.loginWithPassword(this.state.username, this.state.password, function (err, success) {
+      console.log(err);
+      console.log('success');
+    });
   }
 
   signUp (event) {
@@ -41,7 +45,7 @@ export default class SignUp extends React.Component {
           type='password' 
           value={this.state.password}
           onChange={(event) => handleChange(this, 'password', event.target.value)}/>
-        <Button positive fluid onClick={this.login}>Login</Button>
+        <Button primary fluid onClick={this.login}>Login</Button>
         <Button positive fluid onClick={this.signUp}>Sign up</Button>
       </Form>
     )
