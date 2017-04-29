@@ -3,7 +3,8 @@ import { Meteor } from 'meteor/meteor'
 import React from 'react';
 import { render } from 'react-dom';
 import Routes from '/imports/client/core/Routes';
-import { Select } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 
 class Home extends React.Component {
   constructor(props) {
@@ -16,13 +17,12 @@ class Home extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    const value = event.target.value;
-    const name = event.target.name;
+  handleChange(property, value) {
+    let obj = {};
 
-    this.setState({
-      [name]: value
-    });
+    obj[property] = value;
+
+    this.setState(obj);
   }
 
   handleSubmit(event) {
@@ -79,23 +79,25 @@ class Home extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         Study At
-        <Select placeholder="School" 
+        <Dropdown placeholder="School"
+          search selection
           options={schoolOptions}
           name="school"
           value={this.state.school}
-          onChange={this.handleChange}
+          onChange={(event, props) => this.handleChange('school', props.value)}
         />
         For
-        <Select placeholder="Subject" 
+        <Dropdown placeholder="Subject"
+          search selection
           options={subjectOptions}
           name="subject"
           value={this.state.subject}
-          onChange={this.handleChange}
+          onChange={(event, props) => this.handleChange('subject', props.value)}
         />
         <label>
-          <input
+          <Button
             type="submit"
-            value="Search" />
+            content='Search' />
         </label>
       </form >
     );
