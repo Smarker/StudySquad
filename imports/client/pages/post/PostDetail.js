@@ -81,7 +81,9 @@ class PostDetail extends React.Component {
             </Item.Content>
           </Item>
         </Grid.Column>
-        <Grid.Column width={16}>
+        <Grid.Column width={2}>
+        </Grid.Column>
+        <Grid.Column width={14}>
           {post.description}
         </Grid.Column>
       </Grid>
