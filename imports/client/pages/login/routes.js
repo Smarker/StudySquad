@@ -7,4 +7,6 @@ import Login from './Login';
 
 const LOGIN_ROUTE = '/login';
 
-pages.push(<Route key={LOGIN_ROUTE} path ={LOGIN_ROUTE} component={Login} />)
+pages.push(<Route key={LOGIN_ROUTE} path ={LOGIN_ROUTE} component={Login} />);
+
+export default LOGIN_ROUTE;
