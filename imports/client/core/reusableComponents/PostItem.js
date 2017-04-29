@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Card, Icon, Image } from 'semantic-ui-react'
 
-export default class Post extends React.Component {
+export default class PostItem extends React.Component {
   constructor(props) {
     super(props);
   }
