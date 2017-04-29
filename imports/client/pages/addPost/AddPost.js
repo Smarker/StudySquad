@@ -13,7 +13,7 @@ class AddPost extends React.Component {
       schools: props.schools,
       classes: props.classes,
       school: '',
-      clas: '',
+      class: '',
       title: '',
       description: ''
     }
@@ -23,17 +23,33 @@ class AddPost extends React.Component {
     this.submit = this.submit.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+
+    if(this.props != nextProps) {
+      this.state = {
+        schools: nextProps.schools,
+        classes: nextProps.classes,
+        school: '',
+        class: '',
+        title: '',
+        description: ''
+      }
+    }
+  }
+
   submit (event) {
     event.preventDefault();
-    let school = Schools.findOne({name: this.state.school});
-    if (school) {
-      let classes = [...school.classes];
-      classes.push(this.state.class);
-      Schools.update({name: this.state.school}, {$set: {classes: classes}})
-    } else {
-      Schools.insert({name: this.state.school, class: [this.state.class]})
-    }
+    // let school = Schools.findOne({name: this.state.school});
+    // console.log(school);
+    // if (school) {
+    //   let classes = school.class;
+    //   classes.push(this.state.classes);
+    //   Schools.update({name: this.state.school}, {$set: {classes: classes}})
+    // } else {
+    //   Schools.insert({name: this.state.school, class: [this.state.class]})
+    // }
 
+    
 
     //todo: now create the post
     //TODO : add message to display as success submits successfully
@@ -46,7 +62,7 @@ class AddPost extends React.Component {
       value:  props.value
     });
     this.setState({
-      schools: currentSchools,
+      schools: currentSchools,  
       school: props.value
     })
   }
@@ -65,39 +81,40 @@ class AddPost extends React.Component {
 
   handleChange (property, value) {
     let obj = {};
+    let school = Schools.findOne({name: value});
     obj[property] = value;
+    if(school && school.classes) {
+      obj['classes'] = school.classes;
+    }
     this.setState(obj);
   }
 
   render () {
-
+    console.log(this.state.school);
     let schoolOptions = this.state.schools.map((school) => {
       return {
         text: school.name,
-        value: school.id
+        value: school.name
       }
     });
-
     let classOptions = this.state.classes.map((clas) => {
       return {
         text: clas.name,
-        value: clas.id
+        value: clas.name
       }
     });
-    console.log(this.state.schools);
-    console.log(this.state.school);
 
     return (
+    
       <Form>  
         <Form.Group>
           <Form.Field required width={8}>
             <label>School</label>
-            <Dropdown
+            <Dropdown 
               search
               selection
-              allowAdditions
               placeholder='Choose a school'
-              options={this.state.schools}
+              options={schoolOptions}
               value={this.state.school}
               onAddItem={this.onAddSchool}
               onChange={(event, props) => this.handleChange('school', props.value)} />
@@ -107,12 +124,11 @@ class AddPost extends React.Component {
             <Dropdown
               search
               selection
-              allowAdditions
               placeholder='Choose a class'
-              options={this.state.classes}
+              options={classOptions}
               value={this.state.clas}
               onAddItem={this.onAddClass}
-              onChange={(event, props) => this.handleChange('clas', props.value)} />
+              onChange={(event, props) => this.handleChange('class', props.value)} />
           </Form.Field>
         </Form.Group>
         <Form.Group>
@@ -144,8 +160,12 @@ class AddPost extends React.Component {
 }
 
 let AddPostContainer = createContainer((props) => {
-  let schools = [];
-  let classes = [];
+
+  let schools = Schools.find().fetch();
+  let classes = []
+  if(!schools) {
+    schools = [];
+  }
   return {schools, classes};
 }, AddPost);
 

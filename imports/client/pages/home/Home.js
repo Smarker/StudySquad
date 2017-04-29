@@ -3,8 +3,9 @@ import { Meteor } from 'meteor/meteor'
 import React from 'react';
 import { render } from 'react-dom';
 import Routes from '/imports/client/core/Routes';
-import { Dropdown } from 'semantic-ui-react';
-import { Button } from 'semantic-ui-react';
+import { Dropdown, Button, Grid, Form } from 'semantic-ui-react';
+import PostItem from '../../core/reusableComponents/PostItem';
+import '../../../../client/customStyles/Home';
 
 class Home extends React.Component {
   constructor(props) {
@@ -77,29 +78,38 @@ class Home extends React.Component {
       }
     ]
     return (
-      <form onSubmit={this.handleSubmit}>
-        Study At
-        <Dropdown placeholder="School"
-          search selection
-          options={schoolOptions}
-          name="school"
-          value={this.state.school}
-          onChange={(event, props) => this.handleChange('school', props.value)}
-        />
-        For
-        <Dropdown placeholder="Subject"
-          search selection
-          options={subjectOptions}
-          name="subject"
-          value={this.state.subject}
-          onChange={(event, props) => this.handleChange('subject', props.value)}
-        />
-        <label>
-          <Button
-            type="submit"
-            content='Search' />
-        </label>
-      </form >
+      <Grid columns={1} Relaxed>
+        <Grid.Column className='searchHeader' style={{'height':'100%'}}>
+          <Form onSubmit={this.handleSubmit} >
+            <Form.Group widths='equal'>
+              <Form.Field>
+                <label className='searchHeaderText'>Study At</label>
+                <Dropdown placeholder="School"
+                  search selection
+                  options={schoolOptions}
+                  name="school"
+                  value={this.state.school}
+                  onChange={(event, props) => this.handleChange('school', props.value)}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label className='searchHeaderText'>For</label>
+                <Dropdown placeholder="Subject"
+                  search selection
+                  options={subjectOptions}
+                  name="subject"
+                  value={this.state.subject}
+                  onChange={(event, props) => this.handleChange('subject', props.value)}
+                />
+              </Form.Field>
+            </Form.Group>
+            <Form.Button>Search</Form.Button>
+          </Form>
+        </Grid.Column>
+        <Grid.Column>
+          <PostItem />
+        </Grid.Column>
+      </Grid>
     );
   }
 }
