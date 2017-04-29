@@ -1,6 +1,6 @@
 import React from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
-import { Grid, Card, Icon, Image, Item, Label } from 'semantic-ui-react';
+import { Grid, Card, Icon, Image, Item, Label,Header } from 'semantic-ui-react';
 import { getFormattedDate } from '/imports/client/core/utils/dateFormatter';
 
 import Posts from '/collections/PostSchema';
@@ -54,9 +54,9 @@ class PostDetail extends React.Component {
           <p>Flag</p>
         </Grid.Column>
         <Grid.Column width={10}>
-          <div>
+          <Header size='huge'>
             {post.title}
-          </div>
+          </Header>
           <div>
            {getFormattedDate(post.createdDate) + ' ' + post.school + ' ' + post.class}
           </div>
