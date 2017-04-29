@@ -13,7 +13,7 @@ export default class Post extends React.Component {
           <Grid>
             <Grid.Row>
               <Grid.Column>
-                Icons go here
+                <Icon name='thumbs up' />
               </Grid.Column>
               <Grid.Column>
                 <Card.Header>
