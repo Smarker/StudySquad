@@ -34,11 +34,10 @@ import Posts from '/collections/PostSchema';
       let loading = true;
       if(this.props.post) {
       loading = false;
-      console.log(this.props.post);
       let comments = this.props.post.comments.map((comment, index) => {
         return (
           <Comment key={index}>
-            <Comment.Avatar src='sup' />
+            <Comment.Avatar src='/matt.jpg' />
             <Comment.Content>
               <Comment.Author>{comment.username}</Comment.Author>
               <Comment.Metadata>
@@ -68,7 +67,7 @@ import Posts from '/collections/PostSchema';
             {documents}
           </List>
           <Header dividing size='large'>
-            Comments
+            {'Comments ' + '(' + this.props.post.comments.length + ')'}  
           </Header>
           <Container text>
             <Comment.Group>

@@ -52,7 +52,7 @@ class SearchResults extends React.Component {
       {text: 'Oldest to to newest', value: 'oldest'},
       {text: 'Most popular', value: 'likes'}
     ];
-    console.log(this.state.sort);
+
     return (
       <Grid columns={1}>
         <Grid.Column width={3}>

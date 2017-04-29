@@ -19,7 +19,7 @@ class AddPost extends React.Component {
       description: '',
       documents: [],
       loading: false,
-      alert: {alertVisible: false, message: null}
+      alert: {alertVisible: false, message: null, color: null}
     }
     this.onAddSchool = this.onAddSchool.bind(this);
     this.onAddClass = this.onAddClass.bind(this);
@@ -42,7 +42,7 @@ class AddPost extends React.Component {
         title: '',
         description: '',
         documents: [],
-        alert: {alertVisible: false, message: null}
+        alert: {alertVisible: false, message: null, color: null}
       }
     }
   }
@@ -60,9 +60,9 @@ class AddPost extends React.Component {
     // }
 
     if(!this.state.school || !this.state.clas || !this.state.title || !this.state.description) {
-      this.setState({alert: {alertVisible: true, message: 'All required fields must be filled in'}});
+      this.setState({alert: {alertVisible: true, message: 'All required fields must be filled in', color: 'red'}});
     }  else if(this.state.documents.length == 0){
-      this.setState({alert: {alertVisible: true, message: 'Please upload at least one document'}});
+      this.setState({alert: {alertVisible: true, message: 'Please upload at least one document', color: 'red'}});
     }
     else {
       let user = this.props.user;
@@ -72,6 +72,8 @@ class AddPost extends React.Component {
             description: this.state.description, 
             likes: [], 
             likeCount: 0,
+            flags: [],
+            flagCount: 0,
             attachmentNumber: this.state.documents.length, 
             school: this.state.school, 
             class: this.state.clas, 
@@ -80,12 +82,10 @@ class AddPost extends React.Component {
             documents:this.state.documents,
             comments: []
         });
-
         Meteor.users.update({_id:user._id}, {$set: {'profile.rep': user.profile.rep + 1}});
-
-        this.setState({title: '', description: '', school: '', clas: '', documents: [], alert: {alertVisible: true, message: 'Saved Successfully'}});
+        this.setState({title: '', description: '', school: '', clas: '', documents: [], alert: {alertVisible: true, message: 'Saved Successfully', color: 'green'}});
       } else {
-        this.setState({alert: {alertVisible: true, message: 'You have to be logged in before you submit a post.'}});
+        this.setState({alert: {alertVisible: true, message: 'You have to be logged in before you submit a post.', color: 'red'}});
       }
 
     }
@@ -133,7 +133,7 @@ class AddPost extends React.Component {
   }
 
   handleDismiss (event) {
-    this.setState({alert: {alertVisible: false, message: null}});
+    this.setState({alert: {alertVisible: false, message: null, color: null}});
   }
 
   onFileChange(event) {
@@ -209,6 +209,7 @@ class AddPost extends React.Component {
         <Message
           onDismiss={this.handleDismiss}
           header={this.state.alert.message}
+          color={this.state.alert.color}
         />
         }
         <Form.Group>
