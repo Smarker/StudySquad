@@ -1,10 +1,11 @@
 'use strict'
 import React from 'react';
-import { Form, Button, Dropdown } from 'semantic-ui-react';
+import { Form, Button, Dropdown, Message } from 'semantic-ui-react';
 import { handleChange } from '/imports/client/core/utils/formHelpers';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Random } from 'meteor/random'
 import Schools from '/collections/SchoolSchema';
+import Posts from '/collections/PostSchema';
 
 class AddPost extends React.Component {
   constructor (props) {
@@ -15,12 +16,16 @@ class AddPost extends React.Component {
       school: '',
       class: '',
       title: '',
-      description: ''
+      description: '',
+      alert: {alertVisible: false, message: null}
     }
     this.onAddSchool = this.onAddSchool.bind(this);
     this.onAddClass = this.onAddClass.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.submit = this.submit.bind(this);
+    this.handleDismiss = this.handleDismiss.bind(this);
+    this.onFileChange = this.onFileChange.bind(this);
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -32,7 +37,8 @@ class AddPost extends React.Component {
         school: '',
         class: '',
         title: '',
-        description: ''
+        description: '',
+        alert: {alertVisible: false, message: null}
       }
     }
   }
@@ -49,6 +55,19 @@ class AddPost extends React.Component {
     //   Schools.insert({name: this.state.school, class: [this.state.class]})
     // }
 
+    if(!this.state.school || !this.state.class || !this.state.title || !this.state.description) {
+      console.log("sup");
+      this.setState({alert: {alertVisible: true, message: 'All required fields must be filled in'}});
+    } else {
+      
+      if(Meteor.user()) {
+        Posts.insert({title: this.state.title, description: this.state.description, likes: 0, attachmentNumber: 0, school: this.state.school, class: this.state.class, createdDate: new Date(), createdBy: Meteor.user().username});
+        this.setState({title: '', class: '', description: '', school: '', clas: '', alert: {alertVisible: true, message: 'Saved Successfully'}});
+      } else {
+        this.setState({alert: {alertVisible: true, message: 'You have to be logged in before you submit a post.'}});
+      }
+
+    }
     
 
     //todo: now create the post
@@ -86,11 +105,22 @@ class AddPost extends React.Component {
     if(school && school.classes) {
       obj['classes'] = school.classes;
     }
+    obj['alert'] = {
+      alertVisible: false, message: null
+    }
     this.setState(obj);
   }
 
+  handleDismiss (event) {
+    this.setState({alert: {alertVisible: false, message: null}});
+  }
+
+  onFileChange(event) {
+    console.log(event.target.files[0]);
+  }
+
   render () {
-    console.log(this.state.school);
+    
     let schoolOptions = this.state.schools.map((school) => {
       return {
         text: school.name,
@@ -107,6 +137,12 @@ class AddPost extends React.Component {
     return (
     
       <Form>  
+        {this.state.alert.alertVisible &&
+        <Message
+          onDismiss={this.handleDismiss}
+          header={this.state.alert.message}
+        />
+        }
         <Form.Group>
           <Form.Field required width={8}>
             <label>School</label>
@@ -153,7 +189,15 @@ class AddPost extends React.Component {
             value={this.state.description}
             onChange={(event) => handleChange(this, 'description', event.target.value) }/>
         </Form.Group>
-        <Button type='submit' positive floated='right' onClick={this.submit}>Submit</Button>
+       
+        <Form.Group>
+          <label htmlFor="file">Load pdf: </label>&nbsp;
+            <input
+              type="file"
+              onChange={this.onFileChange}
+            />
+        </Form.Group>
+         <Button type='submit' positive floated='right' onClick={this.submit}>Submit</Button>
       </Form>
     )
   }
