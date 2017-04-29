@@ -30,4 +30,3 @@ let SearchResultsContainer = createContainer((props) => {
 }, SearchResults);
 
 export default SearchResultsContainer;
-
