@@ -5,7 +5,6 @@ const schema = {};
 
 schema.subject = new SimpleSchema({
   name: {
-
     type: String,
     label: 'Subject'
   },
@@ -17,6 +16,5 @@ schema.documents = new SimpleSchema({
     labe: 'Document base64'
   }
 })
-
 
 export default schema;
