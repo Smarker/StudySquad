@@ -9,7 +9,7 @@ export default class PostData extends React.Component {
   render () {
     return (
        <Grid stackable>
-          <Grid.Row>
+          <Grid.Row className='post-style'>
             <Grid.Column width={2} verticalAlign='middle' textAlign='center'>
               <Icon name='thumbs up' size='large' /> 3
               <Icon name='attach' size='large' /> 4
