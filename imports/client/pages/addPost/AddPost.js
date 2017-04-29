@@ -24,6 +24,8 @@ class AddPost extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.submit = this.submit.bind(this);
     this.handleDismiss = this.handleDismiss.bind(this);
+    this.onFileChange = this.onFileChange.bind(this);
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -59,8 +61,10 @@ class AddPost extends React.Component {
     } else {
       
       if(Meteor.user()) {
-        Posts.insert({title: this.state.title, description: this.state.description, likes: 0, attachmentNumber: 0, school: this.state.school, class: this.state.class, createdDate: new Date().getTime(), createdBy: Meteor.user().username});
+        Posts.insert({title: this.state.title, description: this.state.description, likes: 0, attachmentNumber: 0, school: this.state.school, class: this.state.class, createdDate: new Date(), createdBy: Meteor.user().username});
         this.setState({title: '', class: '', description: '', school: '', clas: '', alert: {alertVisible: true, message: 'Saved Successfully'}});
+      } else {
+        this.setState({alert: {alertVisible: true, message: 'You have to be logged in before you submit a post.'}});
       }
 
     }
@@ -106,8 +110,13 @@ class AddPost extends React.Component {
     }
     this.setState(obj);
   }
+
   handleDismiss (event) {
     this.setState({alert: {alertVisible: false, message: null}});
+  }
+
+  onFileChange(event) {
+    console.log(event.target.files[0]);
   }
 
   render () {
@@ -180,7 +189,15 @@ class AddPost extends React.Component {
             value={this.state.description}
             onChange={(event) => handleChange(this, 'description', event.target.value) }/>
         </Form.Group>
-        <Button type='submit' positive floated='right' onClick={this.submit}>Submit</Button>
+       
+        <Form.Group>
+          <label htmlFor="file">Load pdf: </label>&nbsp;
+            <input
+              type="file"
+              onChange={this.onFileChange}
+            />
+        </Form.Group>
+         <Button type='submit' positive floated='right' onClick={this.submit}>Submit</Button>
       </Form>
     )
   }
