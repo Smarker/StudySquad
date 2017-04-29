@@ -1,38 +1,89 @@
 'use strict'
 import React from 'react';
+import { Grid, Header, Divider, Comment, Form, Button } from 'semantic-ui-react'
 import { createContainer } from 'meteor/react-meteor-data';
+import { getFormattedDate } from '/imports/client/core/utils/dateFormatter';
+import { handleChange } from '/imports/client/core/utils/formHelpers';
 import Schools from '/collections/SchoolSchema';
-import PostData from '../../core/reusableComponents/PostData';
+import PostDetail from './PostDetail';
 import Posts from '/collections/PostSchema';
 
- class Post extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {postID: props.location.pathname.split('/')};
-  }
+  class Post extends React.Component {
+    constructor (props) {
+      super(props);
+      this.state = {
+        comment: ''
+      }
+      this.addComment = this.addComment.bind(this);
+    }
 
-  render () {
-    return (
-    <div>
-       <PostData />
-    </div>
-    )
-  }
+    addComment () {
+
+    }
+
+    render () {
+
+      let comments = this.props.post.comments.map((comment, index) => {
+        return (
+          <Comment key={index}>
+            <Comment.Avatar src='sup' />
+            <Comment.Content>
+              <Comment.Author>{comment.username}</Comment.Author>
+              <Comment.Metadata>
+                <div>{getFormattedDate(comment.createdDate)}</div>
+              </Comment.Metadata>
+              <Comment.Text>{comment.comment}</Comment.Text>
+            </Comment.Content>
+          </Comment>
+        )
+      });
+      
+      return (
+        <div>
+          <PostDetail post={this.props.post} />
+          <p>
+            FILES HERE
+          </p>
+          <Header dividing size='large'>
+            Comments
+          </Header>
+          <Comment.Group>
+            {comments}
+            <Form reply onSubmit={this.addComment}>
+              <Form.TextArea 
+                value={this.state.comment}
+                onChange={(event) => handleChange(this, 'comment', event.target.value) } />
+              <Button content='Add Comment' labelPosition='left' icon='edit' primary />
+            </Form>
+          </Comment.Group>
+        </div>
+      )
+    }
 }
 
 
 let PostContainer = createContainer((props) => {
-  /*
-    find files
-    find comments
-    find title
-    find description
-  */
-  let postID = props.location.pathname.split('/');
+  // return {post: Posts.findOne({_id: props.params.postId})}
 
-  console.log(Posts.find().fetch());
+  return {
+    post: {
+      title: 'yo',
+      description: 'fjdasl;kfjdlksafjdslkajfldsajfkljdsflkdsajfkldsjafljdsfajhsdkjafhdsahfdsafdsahfjdsajfdsahfjkdsahfjdsajfdsaffjdsalkfjdsaklfjdsalkfjdsalkfdsajfkdsajfdklsfjdklasjfdkslfjdsalk',
+      likes: 5,
+      comments: [
+        {username: 'bob', comment: 'fjdlkasjfkldsajfldkasfda', createdDate: new Date()},
+        {username: 'bob', comment: 'fjdlkasjfkldsajfldkasfda', createdDate: new Date()},
+        {username: 'bob', comment: 'fjdlkasjfkldsajfldkasfda', createdDate: new Date()},
+        {username: 'bob', comment: 'fjdlkasjfkldsajfldkasfda', createdDate: new Date()},
+        {username: 'bob', comment: 'fjdlkasjfkldsajfldkasfda', createdDate: new Date()},
+      ],
+      createdBy: 'svuong',
+      createdDate: new Date(),
+      school: 'Rutgers',
+      class: 'Calculus'
+    }
+  }
 
-  return {files: 'Sup', comments: 'SUp'}
 }, Post)
 
 export default PostContainer;
