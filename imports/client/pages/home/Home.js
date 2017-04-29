@@ -4,10 +4,11 @@ import React from 'react';
 import { render } from 'react-dom';
 import Routes from '/imports/client/core/Routes';
 import { Dropdown, Button, Grid, Form } from 'semantic-ui-react';
-import PostItem from '../../core/reusableComponents/PostItem';
 import '../../../../client/customStyles/Home';
 import { createContainer } from 'meteor/react-meteor-data';
 import { browserHistory } from 'react-router';
+import PostItem from '../../core/reusableComponents/PostItem';
+import Posts from '/collections/PostSchema';
 
 import Schools from '/collections/SchoolSchema';
 
@@ -16,7 +17,7 @@ class Home extends React.Component {
     super(props);
 
     this.state = {
-      isOpen: true,
+      posts: props.posts,
       school: '', //selected school from dropdown
       subject: '', //selected subject from dropdown
       schools: props.schools, //from mongo
@@ -35,6 +36,7 @@ class Home extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props != nextProps) {
       this.state = {
+        posts: nextProps.posts,
         schools: nextProps.schools,
         schoolOptions: nextProps.schoolOptions
       }
@@ -90,6 +92,14 @@ class Home extends React.Component {
   }
 
   render() {
+
+    const PostList = this.props.posts.map((post) => {
+      return <PostItem post={post} key={post._id} />;
+    });
+
+
+
+
     return (
       <Grid columns={1}>
         <Grid.Column className='searchHeader'
@@ -123,7 +133,7 @@ class Home extends React.Component {
                   </Form.Field>
                   <Form.Field width={4}>
                     <label style={{ visibility: 'hidden' }}>something</label>
-                    <Form.Button style={{ paddingLeft: '2em' }}>Search</Form.Button>
+                    <Form.Button primary style={{ paddingLeft: '2em' }}>Search</Form.Button>
                   </Form.Field>
                   <Form.Field width={2} />
 
@@ -133,6 +143,10 @@ class Home extends React.Component {
           </Grid>
         </Grid.Column>
         <Grid.Column>
+          {PostList}
+
+
+
         </Grid.Column>
       </Grid>
     );
@@ -142,6 +156,9 @@ class Home extends React.Component {
 
 let HomeContainer = createContainer((props) => {
   let schools = Schools.find({}).fetch();
+
+  let posts = Posts.find({}, {sort: {createdDate: 1}, limit: 5}).fetch();
+
 
   const schoolOptions = [];
 
@@ -154,6 +171,7 @@ let HomeContainer = createContainer((props) => {
   );
 
   return {
+    posts,
     schools: schools,
     schoolOptions: schoolOptions
   }

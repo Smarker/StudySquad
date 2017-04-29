@@ -1,13 +1,20 @@
 /* CSS declarations go here */
-a {
+/*a {
   color: #303036 !important;
-}
+}*/
 
 .post-style:hover #title {
     color: #FC5130 !important;
 }
 
-.post-style {
-  background-color: #FCFBF7;
-/*  background-clip:content-box; */
+.post-style  #description {
+    
 }
+
+/*
+.post-style {
+  background-color: #F3C969;
+  background-clip:content-box; 
+}
+*/
+
