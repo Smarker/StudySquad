@@ -2,7 +2,7 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema'
 import { Mongo } from 'meteor/mongo';
-import schema from './CommonSchema';
+// import schema from './CommonSchema';
 
 const Posts = new Mongo.Collection('Posts');
 
