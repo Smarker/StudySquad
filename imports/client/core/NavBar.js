@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Link } from 'react-router';
 import { Menu, Icon, Input } from 'semantic-ui-react'
 import LOGIN_ROUTE from '/imports/client/pages/login/routes';
-import SIGN_UP_ROUTE from '/imports/client/pages/signUp/routes';
+// import SIGN_UP_ROUTE from '/imports/client/pages/signUp/routes';
 import ADD_POST_ROUTE from '/imports/client/pages/addPost/routes';
 import POST_ROUTE from '/imports/client/pages/post/routes';
 import SEARCH_RESULTS from '/imports/client/pages/searchResults/routes';
 
-class NavBar extends Component {
+class NavBar extends React.Component {
   componentDidMount () {
     this.props.setNavBarHeight(ReactDOM.findDOMNode(this))
   }
