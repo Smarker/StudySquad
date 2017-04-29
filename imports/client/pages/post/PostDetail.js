@@ -63,7 +63,7 @@ class PostDetail extends React.Component {
         </Grid.Column>
         <Grid.Column textAlign='right' width={4}>
           <Item>
-            <Item.Image size='tiny' src='/matt.png' />
+            <Item.Image size='tiny' src='/matt.jpg' />
             <Item.Content verticalAlign='middle'>{post.createdBy}</Item.Content>
           </Item>
         </Grid.Column>
