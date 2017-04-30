@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Link } from 'react-router';
-import { Menu, Icon, Input } from 'semantic-ui-react'
+import { Menu, Icon, Input, Image } from 'semantic-ui-react'
 import { handleChange } from '/imports/client/core/utils/formHelpers';
 
 import LOGIN_ROUTE from '/imports/client/pages/login/routes';
